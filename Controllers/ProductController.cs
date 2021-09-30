@@ -44,10 +44,10 @@ namespace Supemarket.Controllers
         }
 
         // PUT api/<ValuesController>/5
-        [HttpPut]
-        public ServiceResponse<Product> UpdateProduct(Product updatedProduct)
+        [HttpPut("{id}")]
+        public ServiceResponse<Product> UpdateProduct(int id , ProductModel updatedProduct)
         {
-            return productManager.UpdateProduct(updatedProduct);
+            return productManager.UpdateProduct(id , updatedProduct);
         }
 
         // DELETE api/<ValuesController>/5

@@ -3,6 +3,8 @@ using Supemarket.Manager;
 using Supemarket.Entities;
 using System.Collections.Generic;
 using supemarket.models;
+using Supemarket.Models;
+using System.Threading.Tasks;
 
 namespace Supemarket.Controllers
 {
@@ -16,6 +18,13 @@ namespace Supemarket.Controllers
         {
             _orderManager = orderManager;
         }
+
+        //[HttpPost("skill")]
+        //public async Task<ActionResult<Order>> AddOrderProduct(List<OrderModelWithProducts> newOrderModelWithProducts)
+        //{
+        //    return Ok(await _orderManager.AddCharacterSkill(newOrderModelWithProducts));
+        //}
+
 
         [HttpPost]
         public ServiceResponse<Order> AddOrder(OrderModel newOrder)

@@ -9,9 +9,8 @@ namespace Supemarket.Contracts.Mapping
     public static class OrderMapping
     { 
 
-        public static Order MapOrderModelToEntity(this OrderModel orderModel)
+        public static Order MapOrderModelToEntity(  this OrderModel orderModel , Order o)
         {
-            Order o = new Order();
             o.address = orderModel.address;
             o.total = orderModel.total;
             return o;

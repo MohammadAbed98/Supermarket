@@ -11,7 +11,10 @@ namespace Supemarket.Entities
     {
         public int id { get; set; }
         public double total { get; set; } = 0;
-        public List<Product> products { get; set; }
         public String address { get; set; }
+        public String listOfProducts { get; set; }
+        public List<Product> products { get; set; }
+        public List<OrderProduct> OrderProduct { get; set; }
+
     }
 }

@@ -17,6 +17,5 @@ namespace Supemarket.Models
         public DateTime endtDate { get; set; }
         public int numberOfPecis { get; set; } = 12;
         public ProductTypesModel type { get; set; } = ProductTypesModel.chips;
-        public object ProductMapper { get; internal set; }
     }
 }

@@ -12,7 +12,7 @@ namespace Supemarket.Manager
         public Product Find(int id);
         public ServiceResponse<Product> GetProductById(int id);
         public ServiceResponse<Product> AddProduct(ProductModel newProduct);
-        public ServiceResponse<Product> UpdateProduct(Product updatedProduct);
+        public ServiceResponse<Product> UpdateProduct(int id , ProductModel updatedProduct);
         ServiceResponse<List<Product>> GetAllProducts();
         ServiceResponse<Product> Delete(int id);
     }
@@ -57,12 +57,12 @@ namespace Supemarket.Manager
             return serviceResponse;
         }
 
-        public ServiceResponse<Product> UpdateProduct(Product updatedProduct)
+        public ServiceResponse<Product> UpdateProduct(int id , ProductModel updatedProduct)
         {
             var serviceResponse = new ServiceResponse<Product>();
-            if (Find(updatedProduct.id) != null)
+            if (Find(id) != null)
             {
-                serviceResponse = _productRepo.UpdateProduct(updatedProduct);
+                serviceResponse = _productRepo.UpdateProduct(id , updatedProduct.MapProductModelToEntity());
             }
             else
             {

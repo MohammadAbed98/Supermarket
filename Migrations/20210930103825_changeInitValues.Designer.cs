@@ -10,8 +10,8 @@ using Supemarket.Data;
 namespace Supemarket.Migrations
 {
     [DbContext(typeof(SupermarketDbContext))]
-    [Migration("20210929105110_CreateDB")]
-    partial class CreateDB
+    [Migration("20210930103825_changeInitValues")]
+    partial class changeInitValues
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -29,6 +29,11 @@ namespace Supemarket.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("address")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("listOfProducts")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("total")
@@ -39,6 +44,26 @@ namespace Supemarket.Migrations
                     b.ToTable("Orders");
                 });
 
+            modelBuilder.Entity("Supemarket.Entities.OrderProduct", b =>
+                {
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
+                    b.HasKey("OrderId", "ProductId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("OrderProduct");
+                });
+
             modelBuilder.Entity("Supemarket.Entities.Product", b =>
                 {
                     b.Property<int>("id")
@@ -46,14 +71,13 @@ namespace Supemarket.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("OrderId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("endtDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("name")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<int>("numberOfPecis")
                         .HasColumnType("int");
@@ -72,23 +96,36 @@ namespace Supemarket.Migrations
 
                     b.HasKey("id");
 
-                    b.HasIndex("OrderId");
-
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("Supemarket.Entities.Product", b =>
+            modelBuilder.Entity("Supemarket.Entities.OrderProduct", b =>
                 {
-                    b.HasOne("Supemarket.Entities.Order", "order")
-                        .WithMany("products")
-                        .HasForeignKey("OrderId");
+                    b.HasOne("Supemarket.Entities.Order", "Order")
+                        .WithMany("OrderProduct")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("order");
+                    b.HasOne("Supemarket.Entities.Product", "Product")
+                        .WithMany("OrderProduct")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Order");
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("Supemarket.Entities.Order", b =>
                 {
-                    b.Navigation("products");
+                    b.Navigation("OrderProduct");
+                });
+
+            modelBuilder.Entity("Supemarket.Entities.Product", b =>
+                {
+                    b.Navigation("OrderProduct");
                 });
 #pragma warning restore 612, 618
         }

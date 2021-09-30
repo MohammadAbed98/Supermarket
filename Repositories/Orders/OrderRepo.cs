@@ -1,9 +1,12 @@
-﻿using supemarket.models;
+﻿using Microsoft.EntityFrameworkCore;
+using supemarket.models;
 using Supemarket.Data;
 using Supemarket.Entities;
+using Supemarket.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Supemarket.Repositories.Orders
 {
@@ -13,8 +16,11 @@ namespace Supemarket.Repositories.Orders
         public List<Order> GetAllOrders();
         public Order GetById(int id);
         public bool DeleteOrder(Order deletedOrder);
-        public bool UpdateOrder(int id , OrderModel updatedOrder);
+        public bool UpdateOrder(int id , Order updatedOrder);
         public Order Find(int id);
+
+        public void save();
+
 
     }
     public class OrderRepo : IOrderRepo
@@ -96,7 +102,7 @@ namespace Supemarket.Repositories.Orders
         }
 
 
-            public bool UpdateOrder(int id , OrderModel updatedOrder)
+            public bool UpdateOrder(int id , Order updatedOrder)
             {
             bool success = true;
             try
@@ -104,6 +110,7 @@ namespace Supemarket.Repositories.Orders
                 var serviceResponse = new ServiceResponse<Order>();
                 Order toUpdateOrder = Find(id); 
                 toUpdateOrder.address = updatedOrder.address;
+                toUpdateOrder.listOfProducts = updatedOrder.listOfProducts;
                 //toUpdateOrder.products = updatedOrder.products;
                 toUpdateOrder.total = updatedOrder.total;
                 _db.SaveChanges();
@@ -118,5 +125,12 @@ namespace Supemarket.Repositories.Orders
         {
             return _db.Orders.FirstOrDefault(p => p.id == id);
         }
+
+        public void save()
+        {
+            _db.SaveChangesAsync();
+        }
+
+ 
     }
 }

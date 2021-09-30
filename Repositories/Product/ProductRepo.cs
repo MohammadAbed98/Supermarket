@@ -12,10 +12,9 @@ namespace Supemarket.Repositories.ProductRepo
         public ServiceResponse<List<Product>> GetAllProducts();
         public ServiceResponse<Product> GetProductById(int id);
         public ServiceResponse<Product> AddProduct(Product newProduct);
-        public ServiceResponse<Product> UpdateProduct(Product updatedProduct);
+        public ServiceResponse<Product> UpdateProduct(int id , Product updatedProduct);
         public ServiceResponse<Product> Delete(int id);
         public Product Find(int id);
-        public List<Product> FindProductsByListOfIds(int[] products);
     }
     public class ProductRepo : IProductRepo
     {
@@ -86,10 +85,10 @@ namespace Supemarket.Repositories.ProductRepo
 
       
 
-        public ServiceResponse<Product> UpdateProduct(Product updatedProduct)
+        public ServiceResponse<Product> UpdateProduct(int id ,  Product updatedProduct)
         {
             var serviceResponse = new ServiceResponse<Product>();
-            Product product = Find(updatedProduct.id);
+            Product product = Find(id);
             product.name = updatedProduct.name;
             product.price = updatedProduct.price;
             product.parcode = updatedProduct.parcode;
@@ -106,16 +105,6 @@ namespace Supemarket.Repositories.ProductRepo
         {
             return _db.Products.FirstOrDefault(p => p.id == id);
         }
-        public List<Product> FindProductsByListOfIds(int[] products)
-        {
-            List<Product> productsFromDB = new();
-            //private List<Product> productsFromDB  ;
-
-            for (int i = 0; i < products.Count() ; i++)
-            {
-                productsFromDB.Add(Find(products[i]));
-            }
-            return productsFromDB;
-        }
+      
     }
 }
