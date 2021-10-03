@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace Supemarket.Contracts.LightResources
 {
-    [Keyless]
 
     public class ProductLightResource
     {

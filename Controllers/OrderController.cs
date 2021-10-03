@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using supemarket.models;
 using Supemarket.Models;
 using System.Threading.Tasks;
+using Supemarket.Resources;
 
 namespace Supemarket.Controllers
 {
@@ -27,7 +28,7 @@ namespace Supemarket.Controllers
 
 
         [HttpPost]
-        public ServiceResponse<Order> AddOrder(OrderModel newOrder)
+        public ServiceResponse<OrderResource> AddOrder(OrderModel newOrder)
         {
             return _orderManager.AddOrder(newOrder);
         }

@@ -18,8 +18,8 @@ namespace Supemarket.Manager
         public Order FindOrder(int id);
         public ServiceResponse<Order> GetByIdOrder(int id);
         public ServiceResponse<List<Order>> Get();
-        public ServiceResponse<Order> AddOrder(OrderModel newOrder);
-        public ServiceResponse<Order> UpdateOrder(int id , OrderModel updatedorder);
+        public ServiceResponse<OrderResource> AddOrder(OrderModel newOrder);
+        public ServiceResponse<Order> UpdateOrder(int id, OrderModel updatedorder);
         public ServiceResponse<Order> DeleteOrder(int id);
 
     }
@@ -28,41 +28,41 @@ namespace Supemarket.Manager
     {
         private readonly IOrderRepo _orderRepo;
         private readonly IProductRepo _productRepo;
-        public OrderManager(IOrderRepo orderRepo , IProductRepo productRepo)
+        public OrderManager(IOrderRepo orderRepo, IProductRepo productRepo)
         {
-           _orderRepo = orderRepo;
+            _orderRepo = orderRepo;
             _productRepo = productRepo;
         }
-      
-        public ServiceResponse<Order> AddOrder(OrderModel newOrder)
+
+        public ServiceResponse<OrderResource> AddOrder(OrderModel newOrder)
         {
-            var serviceResponse = new ServiceResponse<Order>();
+            var serviceResponse = new ServiceResponse<OrderResource>();
             Order o = new Order();
             string combindedProductsList = "";
-     
-                var products = new List<ProductResource>();
 
-                try
-                {
+            var products = new List<Product>();
+
+            try
+            {
                 products = FindProductsByListOfIds(newOrder.products);
                 for (int i = 0; i < products.Count; i++)
                 {
                     combindedProductsList = combindedProductsList + products[i].name + ", ";
                 }
                 o.listOfProducts = combindedProductsList;
+                o.products = products;
 
-                
 
 
                 try
                 {
                     bool succes = _orderRepo.AddOrder(newOrder.MapOrderModelToEntity(o));
-                if (succes)
-                {
-                    serviceResponse.Success = true;
-                    serviceResponse.Message = "This Order Added";
-                        serviceResponse.Data = o;
-                }
+                    if (succes)
+                    {
+                        serviceResponse.Success = true;
+                        serviceResponse.Message = "This Order Added";
+                        //serviceResponse.Data = o;
+                    }
                 }
                 catch (Exception e)
                 {
@@ -70,13 +70,13 @@ namespace Supemarket.Manager
                     serviceResponse.Message = "ERROR!! Not Added";
 
                 }
-                }
-                 
-                catch (Exception e)
-                {
-                    serviceResponse.Message = "Tere are some of products not available";
-                    serviceResponse.Success = false;
-                }
+            }
+
+            catch (Exception e)
+            {
+                serviceResponse.Message = "Tere are some of products not available";
+                serviceResponse.Success = false;
+            }
 
             return serviceResponse;
         }
@@ -85,11 +85,11 @@ namespace Supemarket.Manager
         {
             var serviceResponse = new ServiceResponse<List<Order>>();
 
-            var orders = new List<Order>() ;
+            var orders = new List<Order>();
             orders = _orderRepo.GetAllOrders();
             try
             {
-                if(orders.Count > 0)
+                if (orders.Count > 0)
                 {
                     serviceResponse.Data = orders;
                     serviceResponse.Message = "This is all orders";
@@ -98,13 +98,14 @@ namespace Supemarket.Manager
                 {
                     serviceResponse.Message = "No any orders";
                 }
-                
-            }catch(Exception e)
+
+            }
+            catch (Exception e)
             {
                 serviceResponse.Message = "Error ";
 
             }
-            
+
             return serviceResponse;
         }
 
@@ -112,10 +113,10 @@ namespace Supemarket.Manager
         public ServiceResponse<Order> GetByIdOrder(int id)
         {
             var serviceResponse = new ServiceResponse<Order>();
-           
+
             if (FindOrder(id) != null)
             {
-                serviceResponse.Data = _orderRepo.GetById(id) ;
+                serviceResponse.Data = _orderRepo.GetById(id);
                 serviceResponse.Message = "Done";
 
             }
@@ -127,10 +128,10 @@ namespace Supemarket.Manager
             return serviceResponse;
         }
 
-        public ServiceResponse<Order> UpdateOrder(int id , OrderModel updatedorder)
+        public ServiceResponse<Order> UpdateOrder(int id, OrderModel updatedorder)
         {
             var serviceResponse = new ServiceResponse<Order>();
-            List<ProductResource> products = new List<ProductResource>();
+            List<Product> products = new List<Product>();
             String combindedProductsList = "";
 
             if (FindOrder(id) != null)
@@ -138,15 +139,15 @@ namespace Supemarket.Manager
                 Order o = new Order();
                 try
                 {
-                products = FindProductsByListOfIds(updatedorder.products);
-                for (int i = 0; i < products.Count; i++)
+                    products = FindProductsByListOfIds(updatedorder.products);
+                    for (int i = 0; i < products.Count; i++)
                     {
                         combindedProductsList = combindedProductsList + products[i].name + ", ";
                     }
-                //o.products = products;   
-                o.listOfProducts = combindedProductsList;
-                serviceResponse.Success = _orderRepo.UpdateOrder(id, updatedorder.MapOrderModelToEntity(o));
-                serviceResponse.Data = updatedorder.MapOrderModelToEntity(o);
+                    //o.products = products;   
+                    o.listOfProducts = combindedProductsList;
+                    serviceResponse.Success = _orderRepo.UpdateOrder(id, updatedorder.MapOrderModelToEntity(o));
+                    serviceResponse.Data = updatedorder.MapOrderModelToEntity(o);
 
                 }
                 catch (Exception e)
@@ -154,8 +155,8 @@ namespace Supemarket.Manager
                     serviceResponse.Message = "Tere are some of products not available";
                     serviceResponse.Success = false;
                 }
-  
-     
+
+
             }
             else
             {
@@ -175,7 +176,7 @@ namespace Supemarket.Manager
                 serviceResponse.Success = _orderRepo.DeleteOrder(deletedOrder);
                 if (serviceResponse.Success)
                 {
-                    serviceResponse.Data = deletedOrder ;
+                    serviceResponse.Data = deletedOrder;
                     serviceResponse.Message = "Removed Orderd";
                 }
                 else
@@ -183,7 +184,7 @@ namespace Supemarket.Manager
                     serviceResponse.Data = deletedOrder;
                     serviceResponse.Message = "ERROR!! Did not removed Orderd";
                 }
-                
+
             }
             else
             {
@@ -202,9 +203,9 @@ namespace Supemarket.Manager
         {
             return _productRepo.Find(id);
         }
-        public List<ProductResource> FindProductsByListOfIds(int[] products)
+        public List<Product> FindProductsByListOfIds(int[] products)
         {
-            List<ProductResource> productsFromDB = new();
+            List<Product> productsFromDB = new();
             //private List<Product> productsFromDB  ;
 
             for (int i = 0; i < products.Count(); i++)
@@ -213,21 +214,21 @@ namespace Supemarket.Manager
                 if (p != null)
                 {
 
-                    ProductResource pR = new ProductResource();
-                    pR.name = p.name;
-                    pR.Id = p.id;
-                    pR.price = p.id;
-                    pR.parcode = p.parcode;
-                    pR.numberOfPecis = p.numberOfPecis;
-                    pR.startDate = p.startDate;
-                    pR.endtDate = p.endtDate;
+                    //Product pR = new Product();
+                    //pR.name = p.name;
+                    //pR.Id = p.id;
+                    //pR.price = p.id;
+                    //pR.parcode = p.parcode;
+                    //pR.numberOfPecis = p.numberOfPecis;
+                    //pR.startDate = p.startDate;
+                    //pR.endtDate = p.endtDate;
 
 
-                    productsFromDB.Add(pR);
+                    productsFromDB.Add(p);
                 }
                 else
                 {
-                    throw new ArgumentNullException() ;
+                    throw new ArgumentNullException();
                 }
 
             }
