@@ -1,0 +1,32 @@
+ng new SuperMarketAngular       >> Create project
+ng generate component products or (ng g c cName)  >> Create new component
+npm install bootstrap           >> install bootstrap // you need to add  "node_modules/bootstrap/dist/css/bootstrap.min.css", path to style in angular.json
+ng generate service >> Add service
+
+
+
+-------------------------------
+--> property pinding: to pass parameters from parent to chiled F.E: from app to header 
+--> Event pinding: to pass parameters from chiled to parent F.E: from header to app   
+
+> to pass elements from parent to chiled:
+in chiled: <ng-content select="h2"></ng-content>
+in parent: <h2>Text</h2>
+OR:
+in chiled: <ng-content select=".h2"></ng-content> ,  .h2: css class
+in parent: <ng-container select="h2"></ng-container>
+OR
+property pinding: 
+> @Input: It means that there is data will enter on this component 
+to pass elements from app ts to any component for example:
+to pass from app to header:
+- decleare  { @Input() isLoginPage: any }  in header.ts >> when call components (in app.com.html) pass value like: <app-header [isLoginPage]="title" > , title is varible in app.comp.ts
+  OR { @Input('is-Login') isLoginPage: any }  >> when call components (in app.com.html) pass value like: <app-header [is-LoginPage]="title" > , title is varible in app.comp.ts
+- when call components (in app.com.html) pass value like: <app-header [isLoginPage]="title" > , title is varible in app.comp.ts
+- use this value in header.comp.html by name isLoginPage
+
+Event pinding: 
+> to pass elements from chiled to parent  :
+> @Output // It means that there is data will take out from this component
+to pass elements from Login comp to app:
+- decleare @Output("viewHeader") isLoginPage = new EventEmitter<boolean>() in login comp when call components (in app.com.html) pass value like: <app-login (viewHeader)="noHeader()"></app-login> // noHeader: is function in app
