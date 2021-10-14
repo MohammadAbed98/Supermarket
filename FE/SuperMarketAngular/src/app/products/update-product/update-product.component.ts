@@ -47,14 +47,18 @@ export class UpdateProductComponent implements OnInit {
   // constructor(private route: ActivatedRoute,private router: Router,
   //   private productService: ProductService) { } 
   constructor(private productService: ProductService ,  private commonService : CommonService , 
-    private fb:FormBuilder ,private router: Router , private route: ActivatedRoute ,  private loginService: LoginService){ }
+    private fb:FormBuilder ,private router: Router , private route: ActivatedRoute ,  private loginService: LoginService,
+    private rout: ActivatedRoute){ }
    
     private setLoggedIn(value: boolean): void {
       this.loginService.setLoggedIn(value);
     }
     ngOnInit() {
+      // this.product =  this.rout.snapshot.data["product"] ;
+      // console.log( ' >> ' +  this.product)
+
     this.setLoggedIn(true) ;
-    this.product = new Products();
+    // this.product = new Products();
     this.id = this.route.snapshot.params['id'];
     this.productService.getProductById(this.id).subscribe(
       product => this.productToBeUpdate = product

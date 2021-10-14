@@ -1,11 +1,13 @@
 
   import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
   import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { Products } from 'src/app/models/products';
 import { CreateOrderComponent } from 'src/app/orders/create-order/create-order.component';
 import { LoginService } from 'src/app/services/loginService.service';
 import { ProductService } from 'src/app/services/product.service';
-import { Store } from 'src/app/services/store.service';
+import { StoreObjects } from 'src/app/services/store.service';
+import { StoreInterface } from 'src/app/store/store';
 
 
 @Component({
@@ -16,6 +18,7 @@ import { Store } from 'src/app/services/store.service';
 export class ProductListComponent implements OnInit {
 
   
+  loggedIn!: boolean;
     searchProductStr: String = "" ;
     @ViewChild('searchStr', { static: false }) searchStr: ElementRef | undefined; // to pass local refernce to out of compnent
   
@@ -24,7 +27,7 @@ export class ProductListComponent implements OnInit {
   
     constructor(private productService: ProductService ,  private router: Router , 
                 private loginService: LoginService , private order:CreateOrderComponent ,
-                 private store: Store, private rout: ActivatedRoute) {}
+                private storeObjects: StoreObjects, private storeNgrx: Store<StoreInterface> ) {}
   
     public displayCart = false
     public href: string = "";
@@ -40,8 +43,9 @@ export class ProductListComponent implements OnInit {
     }
     ngOnInit() {
   
-      this.product =  this.rout.snapshot.data["product"] ;
-      const productsFromStore = this.store.products ;
+      this.storeNgrx.subscribe(data => this.loggedIn = data.loggedIn.loggedIn ) ;
+
+      const productsFromStore = this.storeObjects.products ;
       // this.productInCart = []
       this.href = this.router.url;
       if(this.router.url == "/orders"){
@@ -87,7 +91,7 @@ export class ProductListComponent implements OnInit {
       this.productService.deleteProduct(id).subscribe(
         data => {
           // this.reloadData();
-          this.store.init() ;
+          this.storeObjects.init() ;
         },
         error => console.log(error)) ;
       this.ngOnInit();
@@ -148,7 +152,7 @@ export class ProductListComponent implements OnInit {
       }
       else{
         // filter on data from store:
-      this.store.products.subscribe(
+      this.storeObjects.products.subscribe(
         products => {
           this.listOfProduct = products.filter(products =>  products.name.includes(this.searchStr?.nativeElement.value)) ;
           console.log()
@@ -173,7 +177,7 @@ export class ProductListComponent implements OnInit {
   
     ReloadDataFromStore()
     {
-      this.store.products.subscribe(
+      this.storeObjects.products.subscribe(
         res => (this.listOfProduct = res),
         error => console.log("Error Occured retreving products from server! : ",error),
         () => {}

@@ -5,7 +5,7 @@ import { Products } from 'src/app/models/products';
 import { CommonService } from 'src/app/services/Common.Service';
 import { LoginService } from 'src/app/services/loginService.service';
 import { ProductService } from 'src/app/services/product.service';
-import { Store } from 'src/app/services/store.service';
+import { StoreObjects } from 'src/app/services/store.service';
 
 @Component({
   selector: 'app-add-product',
@@ -28,7 +28,7 @@ export class AddProductComponent implements OnInit {
   // @ViewChild('productActiveInput', { static: false }) productActiveInput: ElementRef | undefined; // to pass local refernce to out of compnent
   
   constructor( private productService: ProductService , private commonService : CommonService ,
-     private fb:FormBuilder , private router: Router , private route: ActivatedRoute ,  private loginService: LoginService, private store:Store ) { }
+     private fb:FormBuilder , private router: Router , private route: ActivatedRoute ,  private loginService: LoginService, private store:StoreObjects ) { }
 
   productToBeUpdate: Products = new Products;
   addForm!: FormGroup;

@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { AsyncSubject, BehaviorSubject, ReplaySubject, Subject } from 'rxjs';
 import { LoginComponent } from 'src/app/login/login.component';
 import { Order } from 'src/app/models/Order';
 import { OrdersService } from 'src/app/services/orders.service';
+import { StoreInterface } from 'src/app/store/store';
 
 @Component({
   selector: 'app-orders-list',
@@ -12,7 +14,13 @@ import { OrdersService } from 'src/app/services/orders.service';
 })
 export class OrdersListComponent implements OnInit {
 
-  constructor(private orderService:OrdersService , private loginService:LoginComponent ) { }
+  loggedIn!: boolean;
+
+
+  constructor(private orderService:OrdersService , private storeNgrx: Store<StoreInterface>) { 
+    this.storeNgrx.subscribe(data => this.loggedIn = data.loggedIn.loggedIn ) ;
+
+  }
 ordersList:Order[] = [] ;
 // ordersListFilter:Order[] = [] ;
 

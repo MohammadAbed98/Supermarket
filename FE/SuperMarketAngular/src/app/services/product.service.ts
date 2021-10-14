@@ -21,15 +21,6 @@ export class ProductService {
     );  
   }
 
-
-  loadProductsByUrl(productUrl: any)
-  {
-    return this.http.get<Products>(this.url +'/Product/${productUrl}')
-    .pipe(
-      shareReplay()
-    );
-  }
-
   //   getProductsList(): Products[] {
 
   //     this.getAllProducts().subscribe(

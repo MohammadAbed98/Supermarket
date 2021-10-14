@@ -13,6 +13,8 @@ import { OrdersListComponent } from './orders/orders-list/orders-list.component'
 import { CreateOrderComponent } from './orders/create-order/create-order.component';
 import { ProductListComponent } from './products/product-list/product-list.component';
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
+import { StoreModule } from '@ngrx/store';
+import { LoginReducer } from './store/store';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,16 +34,9 @@ import { NotFoundPageComponent } from './not-found-page/not-found-page.component
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    StoreModule.forRoot({loggedIn: LoginReducer}),
     RouterModule.forRoot([
-      {path: 'products' , component:ProductListComponent },
-      // {path: '' , component:ProductListComponent },
-      {path: 'login' , component:LoginComponent },
-      {path: 'products/updateProduct/:id' , component:UpdateProductComponent } ,
-      {path: 'products/addProduct' , component:AddProductComponent } ,
-      {path: 'orders' , component:CreateOrderComponent },
-      {path: 'orders-list' , component:OrdersListComponent },
-      { path: '', redirectTo: 'products', pathMatch: 'full' },
-      {path: '**' , component:NotFoundPageComponent }, // any path not available 
+    
     ])
   ],
   providers: [CreateOrderComponent],

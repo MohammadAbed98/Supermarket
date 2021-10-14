@@ -2,7 +2,7 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { LoginService } from './services/loginService.service';
-import { Store } from './services/store.service';
+import { StoreObjects } from './services/store.service';
 
 
 
@@ -20,7 +20,7 @@ export class AppComponent implements OnInit{
   constructor(
     private loginService: LoginService ,
     private router: Router,
-    private store:Store
+    private store:StoreObjects
   ) {  }
 
 

@@ -3,8 +3,8 @@
     <!-- <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script> -->
   </head>
   <app-header></app-header>
-
-  <div class="panel panel-primary">
+  <br><br><br>
+  <div *ngIf="loggedIn" class="panel panel-primary">
       <div class="panel-heading" >
         <h2 *ngIf="!displayCart">Products List</h2>
       </div>

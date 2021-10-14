@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { StoreInterface } from '../store/store';
 
 @Component({
   selector: 'app-header',
@@ -6,14 +8,17 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  @Input() addBtnToHeader: any
  
+  loggedIn!: boolean;
 
 
   showHeader: boolean = true
-  constructor() { }
+  constructor(private storeNgrx: Store<StoreInterface>) { }
 
   ngOnInit(): void {
+    this.storeNgrx.subscribe(data => this.loggedIn = data.loggedIn.loggedIn ) ;
+    console.log(" >>>>>>>>> "+this.loggedIn) ;
+
   }
 
 }

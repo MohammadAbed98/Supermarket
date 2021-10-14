@@ -9,7 +9,7 @@ import { ProductService } from "./product.service";
   providedIn: 'root'  
 })
 
-export class Store {
+export class StoreObjects {
 
     private subject = new BehaviorSubject<Products[]>([]) ;
     products: Observable<Products[]> = this.subject.asObservable();

@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from "@angular/router";
+import { tap } from "lodash";
 import { Observable } from "rxjs";
 import { first } from "rxjs/operators";
 import { Products } from "../models/products";
@@ -14,15 +15,11 @@ export class ProductResolver implements Resolve<Products>{
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):
     Observable<Products>  {
-         
         // localhost:4200/products/angular-router-product
-
-        const productUrl = route.paramMap.get("productUrl") ;
-        console.log(productUrl)
-        return this.productService.loadProductsByUrl(productUrl)
+        const pId = parseInt(''+route.paramMap.get("id")) ;
+        return this.productService.getProductById(57)
         .pipe(
-            first()
+            first() 
         ) ;
     }
-
 }
