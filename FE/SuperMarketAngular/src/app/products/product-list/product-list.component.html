@@ -1,0 +1,80 @@
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!-- <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script> -->
+  </head>
+  <app-header></app-header>
+
+  <div class="panel panel-primary">
+      <div class="panel-heading" >
+        <h2 *ngIf="!displayCart">Products List</h2>
+      </div>
+      <div class="panel-body">
+  
+        <a *ngIf="!displayCart" routerLink="./addProduct" style="font-size:18px;cursor: cell;margin-right: 5%;" > <i class="fa fa-plus-circle"></i>Add Product</a>
+         <!-- Search by button:  -->
+        <!-- <input type="text" id="myInput" [(ngModel)]="searchStr" placeholder="Search for names.." title="Type in a name">
+        <button (click) = "myFunction()">click</button>  -->
+         <!-- <input  id="form_name"  [(ngModel)]="searchProductStr" (ngModelChange)="myFunction()" placeholder="Search for names.." title="Type in a name" >  -->
+         <input  id="form_name"  (keyup)="myFunction()" placeholder="Search for names.." title="Type in a name" #searchStr> 
+   
+        <div id="table-wrapper">
+        <div [ngClass] = "scrollTableClass">
+      
+        <table class="table table-striped" id="myTable">
+          <thead>
+            <tr>
+              <th>Product Id</th> 
+              <th>Product Name</th>
+              <th>Price</th>
+              <th>Production Date</th>
+              <th>Expiry Date</th>
+              <th>Number Of Items</th>
+              <th>Category</th>
+              <th>Dimensions(L*W*H)</th>
+              <th>Made In</th>
+              <th>Active</th>
+              <th>Active</th>
+              
+            </tr>
+          </thead>
+          <tbody>  
+            <tr *ngFor="let product of listOfProduct">
+              <td class="id">{{product.id}}</td>
+              <td class="name">{{product.name}}</td>
+              <td class="price">{{product.price}}</td>
+              <td class="production_date">{{product.production_date}}</td>
+              <td class="expiry_date">{{product.expiry_date}}</td>
+              <td class="number_of_items">{{product.number_of_items}}</td>
+              <td class="category">{{product.category}}</td>
+              <td class="dimentions">{{product.length}} * {{product.width}} * {{product.height}}</td>
+              <td class="made_in">{{product.made_in}}</td>
+              <td class="active">{{product.active}}</td>
+  
+              <!-- <ul>
+                <li *ngFor="let item of items; let i = index" [attr.data-index]="i">
+                    {{item}}
+                </li>
+            </ul> -->
+  
+              <td>
+                <button *ngIf="!displayCart" type="button" (click)="deleteProduct(product.id)" class="btn btn-danger"><i class="fa fa-trash-o"></i></button>
+                <!-- <button (click)="deleteProduct(product.id)" class="btn btn-danger"><i class="fa fa-trash-o"></i>Delete</button> -->
+                <a *ngIf="!displayCart" routerLink="./updateProduct/{{product.id}}" ><button class="btn btn-info" style="margin-left: 10px">Update</button></a> 
+                <!-- <a *ngIf="!displayCart" [routerLink]="'./updateProduct/'+[product.id]" ><button class="btn btn-info" style="margin-left: 10px">Update</button></a>  -->
+                <!-- <button (click)="productDetails(product.id)" class="btn btn-info" style="margin-left: 10px">Details</button> -->
+                <button *ngIf="displayCart" class="btn btn-success"  type="button" (click)="daddProductToCart(product.id)"><i class="fa fa-cart-plus fa-2x"  ></i></button> 
+                <!-- <button *ngIf="displayCart" class="btn btn-success"><i class="fa fa-cart-arrow-down fa-2x"></i></button>  -->
+  
+                </td>
+            </tr>
+          </tbody>
+          <a *ngIf="!displayCart" routerLink="./addProduct" style="font-size:18px;cursor: cell;" > <i class="fa fa-plus-circle"></i>Add Product</a>
+        </table>
+      </div>
+    </div>
+      </div>
+    </div>
+    
+  
+    
+    

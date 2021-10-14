@@ -1,0 +1,60 @@
+<div class="container">
+<h3>Update Car</h3>
+<table form="rowForm" class="table table-striped" width="100%" id="myTable" >
+  <thead>
+    <tr>
+
+      <th>Product Id</th> 
+      <th>Product Name</th>
+      <th>Prica</th>
+      <th>Production Date</th>
+      <th>Expiry Date</th>
+      <th>Number Of Items</th>
+      <th>Category</th>
+      <th>Dimensions(L*W*H)</th>
+      <th>Made In</th>
+      <th>Active</th>
+    </tr>
+  </thead>
+  <tbody>  
+
+      <td ><input type="text" class="form-control is-valid" style="width: 90%;text-align: center;" value="{{productToBeUpdate.id}}" ></td>
+      <td ><input type="text" class="form-control is-valid" style="width: 90%;text-align: center;" value="{{productToBeUpdate.name}}" #productNameInput ></td>
+      <td ><input type="text" class="form-control is-valid" style="width: 90%;text-align: center;" value="{{productToBeUpdate.price}}" #productPriceInput ></td>
+      <td ><input type="Date" class="form-control is-valid" style="width: 90%;text-align: center;" value="{{productToBeUpdate.production_date}}" #productProductionDateInput ></td>
+      <td ><input type="Date" class="form-control is-valid" style="width: 90%;text-align: center;" value="{{productToBeUpdate.expiry_date}}" #productExpiryDateInput></td>
+      <td ><input type="text" class="form-control is-valid" style="width: 90%;text-align: center;" value="{{productToBeUpdate.number_of_items}}" #productNumberOfItemsInput></td>
+      <td ><input type="text" class="form-control is-valid" style="width: 90%;text-align: center;" value="{{productToBeUpdate.category}}" #productCategoryInput></td>
+      <td >
+     
+          <tr>
+            <td class="dimentiosCell"><input type="text" class="form-control is-valid"  value="{{productToBeUpdate.length}}" #productlengthInput></td>
+            <td class="dimentiosCell"><label style="font-size: 20px; margin: 0vw;"> * </label></td>
+          </tr>
+          <tr>
+            <td class="dimentiosCell"><input type="text" class="form-control is-valid"  value="{{productToBeUpdate.width}}" #productwidthInput ></td>
+            <td class="dimentiosCell"><label style="font-size: 20px; margin: 0vw;"> * </label></td>
+          </tr>
+          <tr>
+            <td class="dimentiosCell"><input type="text" class="form-control is-valid"  value="{{productToBeUpdate.height}}" #productHeightInput> </td>
+          </tr>
+      </td> 
+      
+      <td ><input type="text" class="form-control is-valid" style="width: 90%;text-align: center;" value="{{productToBeUpdate.made_in}}" #productMadeInInput></td>
+      <td >
+        <select name="my-select" [(ngModel)]="mySelect" (change)="selectChange()">
+          <option [value]="item.id" *ngFor="let item of data">
+              {{item.name}}
+          </option>
+      </select>
+        <!-- <input type="text" class="form-control is-valid" style="width: 90%;text-align: center;" value="{{productToBeUpdate.active}}" #productActiveInput > -->
+      </td>
+  </tbody>
+</table>
+
+    <button type="submit" class="btn btn-success" (click)="update()">Submit</button>
+
+
+<!-- <a routerLink="../products"><input class="btn btn-primary" type="submit" value="Submit"></a> -->
+
+</div>

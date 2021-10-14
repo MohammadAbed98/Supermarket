@@ -1,0 +1,30 @@
+<div id="topheader">  
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <!-- <a class="navbar-brand" href="#"><ng-container class="h2">Site Logo</ng-container></a> -->
+            <img src="https://cdn.logo.com/hotlink-ok/logo-social.png" alt=""  class="navbar-brand">
+
+          </div>
+          <ul class="nav navbar-nav"> 
+            <li ><a routerLink="/products" routerLinkActive="activeBtn">Products</a></li> 
+            <li ><a routerLink="/orders-list" routerLinkActive="activeBtn">Orders</a></li> 
+            <li><a routerLink="/orders" routerLinkActive="activeBtn">Make Order</a></li>
+            <!-- <li><a href="#">{{addBtnToHeader}}</a></li> -->
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <!-- <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li> -->
+            <li><a href="login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+          </ul>
+        </div>
+      </nav>
+      
+</div>
+
+<!-- <script>
+  $( '#topheader .navbar-nav a' ).on( 'click', function () {
+    $( '#topheader .navbar-nav' ).find( 'li.active' ).removeClass( 'active' );
+    $( this ).parent( 'li' ).addClass( 'active' );
+  });
+</script>  -->
+

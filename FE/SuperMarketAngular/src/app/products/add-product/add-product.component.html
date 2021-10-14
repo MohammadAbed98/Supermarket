@@ -1,0 +1,70 @@
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <!-- <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script> -->
+</head>
+<div class="container">
+<h3>Add Product</h3>
+<table form="rowForm" class="table table-striped" width="100%" id="myTable" >
+  <thead>
+    <tr>
+
+      <th>Product Name</th>
+      <th>Prica</th>
+      <th>Production Date</th>
+      <th>Expiry Date</th>
+      <th>Number Of Items</th>
+      <th>Category</th>
+      <th>Dimensions(L*W*H)</th>
+      <th>Made In</th>
+      <th>Active</th>
+    </tr>
+  </thead>
+  <tbody>  
+
+      <td ><input type="text" class="form-control is-valid" style="width: 90%;text-align: center;"  #productNameInput ></td>
+      <td ><input type="text" class="form-control is-valid" style="width: 90%;text-align: center;"  #productPriceInput ></td>
+      <td ><input type="Date" class="form-control is-valid" style="width: 90%;text-align: center;"  #productProductionDateInput ></td>
+      <td ><input type="Date" class="form-control is-valid" style="width: 90%;text-align: center;"  #productExpiryDateInput></td>
+      <td ><input type="text" class="form-control is-valid" style="width: 90%;text-align: center;"  #productNumberOfItemsInput></td>
+      <td ><input type="text" class="form-control is-valid" style="width: 90%;text-align: center;"  #productCategoryInput></td>
+      <td width="10%" >
+     
+          <tr >
+            <td class="dimentiosCell"><input type="text" class="form-control is-valid" style="width: 85%;"  #productlengthInput></td>
+            <td class="dimentiosCell"><label style="font-size: 20px; margin: 0vw;"> * </label></td>
+          </tr>
+          <tr >
+            <td class="dimentiosCell"><input type="text" class="form-control is-valid" style="width: 85%;"  #productwidthInput ></td>
+            <td class="dimentiosCell"><label style="font-size: 20px; margin: 0vw;"> * </label></td>
+          </tr>
+          <tr >
+            <td class="dimentiosCell"><input type="text" class="form-control is-valid" style="width: 85%;"  #productHeightInput> </td>
+          </tr>
+      </td> 
+      <td ><input type="text" class="form-control is-valid" style="width: 90%;text-align: center;"  #productMadeInInput></td>
+      <td >
+        <select name="my-select" [(ngModel)]="mySelect" (change)="selectChange()">
+            <option [value]="item.id" *ngFor="let item of data">
+                {{item.name}}
+            </option>
+        </select>
+        <!-- <div>
+        {{selectedValue}}
+        </div> -->
+          <!-- <input type="text" class="form-control is-valid" style="width: 90%;text-align: center;"  #productActiveInput > -->
+    </td>
+  </tbody>
+  <a (click)="addRow()" style="font-size:18px;cursor: cell;margin-right: 5%;" > <i class="fa fa-plus-circle"></i>Add Product</a>
+
+</table>
+
+    <button type="submit" class="btn btn-success" (click)="add()">Submit</button>
+
+
+<!-- <a routerLink="../products"><input class="btn btn-primary" type="submit" value="Submit"></a> -->
+
+
+
+</div>
+
+
