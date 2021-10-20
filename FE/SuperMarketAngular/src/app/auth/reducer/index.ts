@@ -1,34 +1,30 @@
-import { createReducer, on } from "@ngrx/store";
-import { AuthActions } from "../action-types";
-import { User } from "../model/User.ts";
+import { createReducer, on } from '@ngrx/store';
+import { AuthActions } from '../action-types';
+import { User } from '../model/User.ts';
 
- /////////////////////////  AuthState    ////////////////////////////////
+/////////////////////////  AuthState Reducer    ////////////////////////////////
 
-export interface AuthState{
-
-    user: User
+export interface AuthState {
+  user: User;
 }
 export const initAuthState: AuthState = {
-    user: {} as User
-} ;
-
-
+  user: {} as User,
+};
 
 export const authReducer = createReducer(
-    initAuthState,
+  initAuthState,
+  on(AuthActions.login, (state, action) => {
+    return {
+      user: action.user, // when get action of login type return the user in store 
+    };
+  }),
 
-    on(AuthActions.login, (state, action) => {
-        return {
-            user: action.user
-        }
-    }),
-
-    on(AuthActions.logout, (state, action) => {
-        return {
-            user: {} as User
-        }
-    })
-    );
+  on(AuthActions.logout, (state, action) => {
+    return {
+      user: {} as User, //when get action of logout type empting the user in store 
+    };
+  })
+);
 
 //  /////////////////////////  CartState    ////////////////////////////////
 // export interface CartState{
@@ -53,12 +49,8 @@ export const authReducer = createReducer(
 //     on(CartActions.outOfCart, (state, action) => {
 //         console.log("inCart: " , action.isInCart);
 //         return {
-//             inCart: action.isInCart 
-          
-            
+//             inCart: action.isInCart
+
 //         }
 //     })
 //     );
-    
-
-

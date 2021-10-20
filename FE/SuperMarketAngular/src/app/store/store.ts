@@ -1,47 +1,39 @@
-import { Action } from "@ngrx/store";
+// import { Action } from "@ngrx/store";
 
 
-export interface StoreInterface{
-    loggedIn: Login,
-}
-export interface Login{
-    loggedIn: boolean,
+// export interface StoreInterface{
+//     loggedIn: Login,
+// }
+// export interface Login{
+//     loggedIn: boolean,
 
-}
-// interface UserInfo{
-//     type: string,
-//     LevelAllowsAaccess: string
+// }
+// // interface UserInfo{
+// //     type: string,
+// //     LevelAllowsAaccess: string
+// // }
+
+
+// let initState = {
+//     loggedIn: false
+
 // }
 
-export interface InChart
-{
-    isInChart: Boolean
-}
+// export function LoginReducer( state = initState , action: Action)
+// {
 
-let initState = {
-    loggedIn: false
+//     switch(action.type){
+//         case 'login':
+//             return {
+//             loggedIn: true,
+//             // LevelAllowsAaccess: action.LevelAllowsAaccess
+//             }
+//         case 'logout':
+//             return {
+//                 loggedIn: false
+//             }
+//         default:    
+//             return state
 
-}
-
-export function LoginReducer( state = initState , action: Action)
-{
-
-    switch(action.type){
-        case 'login':
-            return {
-            loggedIn: true,
-            // LevelAllowsAaccess: action.LevelAllowsAaccess
-            }
-        case 'logout':
-            return {
-                loggedIn: false
-            }
-        default:    
-            return state
-
-    }    
-}
-
-export function InChart(){
-    
-}
+//     }    
+// }

@@ -11,7 +11,6 @@ import { inCart } from 'src/app/orders/orders.action';
 import { AppState, CartState } from 'src/app/reducer';
 import { ProductService } from 'src/app/services/product.service';
 import { StoreObjects } from 'src/app/services/store.service';
-import { StoreInterface } from 'src/app/store/store';
 
 @Component({
   selector: 'app-product-list',
@@ -19,7 +18,6 @@ import { StoreInterface } from 'src/app/store/store';
   styleUrls: ['./product-list.component.css'],
 })
 export class ProductListComponent implements OnInit {
-  loggedIn!: boolean;
 
   searchProductStr: String = '';
   testValue = true ;
@@ -32,7 +30,6 @@ export class ProductListComponent implements OnInit {
     private router: Router,
     private order: CreateOrderComponent,
     private storeObjects: StoreObjects,
-    private storeNgrx: Store<StoreInterface>,
     private appStore: Store<AppState>
   ) {}
   public viewHeader = true;
@@ -46,9 +43,7 @@ export class ProductListComponent implements OnInit {
   listOfProductInCart: Products[] = [];
 
   ngOnInit() {
-    this.storeNgrx.subscribe(
-      (data) => (this.loggedIn = data.loggedIn.loggedIn)
-    );
+
 
     const productsFromStore = this.storeObjects.products;
     // this.productInCart = []
@@ -68,7 +63,6 @@ export class ProductListComponent implements OnInit {
     //   error => console.log("Error Occured retreving products from server! : ",error),
     //   () => {}
     // )  ;
-    // this.setLoggedIn(true) ;
   }
   
 
@@ -95,7 +89,6 @@ export class ProductListComponent implements OnInit {
     this.ngOnInit();
   }
   GetDetails(value: any) {
-    console.log(value);
   }
 
   daddProductToCart(id: number) {
@@ -109,7 +102,6 @@ export class ProductListComponent implements OnInit {
         Number(empTab.rows[Number(i)].getElementsByClassName('id')[0].innerHTML)
       )
         rowIndex = i;
-      console.log(id);
       // break ;
     }
     var productId = Number(
@@ -190,7 +182,7 @@ export class ProductListComponent implements OnInit {
       // const newCartAction = outOfCart({ isInCart: false , dangerClasses:this.productState });
       // this.appStore.dispatch(newCartAction);
     }
-    // this.initIcons(55);
+    this.initIcons(55);
   }
   updateProduct(id: number) {
     // window.open("https://www.youtube.com/watch?v=W4qd5gITe8c","_self")
@@ -208,7 +200,6 @@ export class ProductListComponent implements OnInit {
         this.listOfProduct = products.filter((products) =>
           products.name.includes(this.searchStr?.nativeElement.value)
         );
-        console.log();
       });
       //  fromEvent<any>(this.searchStr?.nativeElement, 'keyup').pipe(
       //   map(e=>e.target.value),
@@ -239,16 +230,14 @@ export class ProductListComponent implements OnInit {
   initIcons(id: number){
 
       var isInCartTemp = new Map<any,any>() ;
-      this.appStore.select(isInCart).subscribe((result) => console.log(isInCartTemp = result.dangerClasses))
+      this.appStore.select(isInCart).subscribe((result) => isInCartTemp = result.dangerClasses)
       if(isInCartTemp.get(id)){
         this.testValue = false; 
-        console.log("false");
       }
       else{
         this.testValue = true;
-        console.log("true");
-
       }
+      console.log(" >>>>>> " , isInCartTemp)
   }
   changeIcons() {
     // this.reloadData();

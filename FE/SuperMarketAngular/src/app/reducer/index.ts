@@ -26,9 +26,6 @@ export const cartReducer = createReducer<any>(
   initCartState,
 
   on(CartActions.inCart, (state, action) => {
-    console.log('inCart: ', action.isInCart);
-    console.log('dangerClasses: ', action.dangerClasses);
-    
     return {
       inCart: action.isInCart,
       dangerClasses: action.dangerClasses,

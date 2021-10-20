@@ -54,7 +54,6 @@ export class UpdateProductComponent implements OnInit {
       // this.product =  this.rout.snapshot.data["product"] ;
       // console.log( ' >> ' +  this.product)
 
-    // this.setLoggedIn(true) ;
     // this.product = new Products();
     this.id = this.route.snapshot.params['id'];
     this.productService.getProductById(this.id).subscribe(

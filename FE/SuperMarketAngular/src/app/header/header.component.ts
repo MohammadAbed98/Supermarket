@@ -7,7 +7,6 @@ import { map } from 'rxjs/operators';
 import { logout } from '../auth/auth.action';
 import { isLoggedIn, isLoggedOut } from '../auth/auth.selector';
 import { AppState } from '../reducer';
-import { StoreInterface } from '../store/store';
 
 @Component({
   selector: 'app-header',
@@ -21,14 +20,12 @@ export class HeaderComponent implements OnInit {
   isLoggedIn!: Observable<boolean> ;
   loading = true ;
   isLoggedOut!: Observable<boolean>;
-  constructor(private storeNgrx: Store<StoreInterface> ,
-     private store: Store<AppState>, 
+  constructor( private store: Store<AppState>, 
      private router: Router , 
      private appStore: Store<AppState>
      ) { }
 
   ngOnInit(): void {
-    this.storeNgrx.subscribe(data => this.loggedIn = data.loggedIn.loggedIn ) ;
     this.router.events.subscribe(event => {}) ;
     this.isLoggedIn = this.store
     .pipe(
@@ -44,6 +41,7 @@ export class HeaderComponent implements OnInit {
   }
 
   Logout(){
+    // throw logout action 
     const newLoginAction = logout() ; 
     this.appStore.dispatch(newLoginAction) ;
   

@@ -10,7 +10,6 @@ import { AuthEffects } from './auth.effect';
 import { EffectsModule } from '@ngrx/effects';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from '../app-routing.module';
-import { LoginReducer } from '../store/store';
 
 
 

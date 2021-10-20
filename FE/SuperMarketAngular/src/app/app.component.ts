@@ -1,6 +1,9 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
+import { login } from './auth/auth.action';
+import { AppState } from './reducer';
 import { StoreObjects } from './services/store.service';
 
 
@@ -17,27 +20,20 @@ export class AppComponent implements OnInit{
   public subscription!: Subscription;
 
   constructor(
-    private router: Router,
-    private store:StoreObjects
+    private storeObject:StoreObjects , 
+    private store: Store<AppState>
   ) {  }
 
 
-  // @Input('viewHeader')viewHeader!: boolean;
+   ngOnInit(): void { 
 
-  @ViewChild('viewHeader', { static: false }) viewHeader: boolean = true; // to pass local refernce to out of compnent
+    // Login action and get user from local storage (to make sure stay login when relode page without logout )
+    const userProfile = localStorage.getItem("user") ;
+    if(userProfile){
+      this.store.dispatch(login({user: JSON.parse(userProfile)}))
+    }
+    this.storeObject.init() ; // To get all products and store them in store 
 
-   ngOnInit(): void {
-    if(this.router.url == "/login"){
-      this.viewHeader = false ;
-    } 
-    this.viewHeader = true ;
-    console.log("ViewHeader: "+this.router.url) ;
-    this.store.init() ;
-    // this.loginService.isLoggedIn.subscribe(value => { value ? this.router.navigate(['./products']) : this.router.navigate(['/login']); });  
-        // get the current value
-  //   this.subscription = this.loginService.getLoggedIn().subscribe(value => {
-  //     this.userLoggedIn = value;
-  // });
   }
   ngOnDestroy(): void {
     if(this.subscription){
@@ -45,14 +41,8 @@ export class AppComponent implements OnInit{
     }
  
  }
-  // viewHeader = false ;
   btnName = 'SuperMarketAngular';
 
-  // noHeader()
-  // {
-  //   this.viewHeader = false
-  //   console.log("test:  " , this.viewHeader)
-  // }
 
 }
  
