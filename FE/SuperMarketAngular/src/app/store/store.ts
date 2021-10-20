@@ -12,6 +12,12 @@ export interface Login{
 //     type: string,
 //     LevelAllowsAaccess: string
 // }
+
+export interface InChart
+{
+    isInChart: Boolean
+}
+
 let initState = {
     loggedIn: false
 
@@ -34,4 +40,8 @@ export function LoginReducer( state = initState , action: Action)
             return state
 
     }    
+}
+
+export function InChart(){
+    
 }

@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { of } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
 import { Products } from 'src/app/models/products';
-import { LoginService } from 'src/app/services/loginService.service';
+import { ProductListComponent } from 'src/app/products/product-list/product-list.component';
 import { OrdersService } from 'src/app/services/orders.service';
+import { StoreObjects } from 'src/app/services/store.service';
 
 @Component({
   selector: 'app-create-order',
@@ -13,13 +16,13 @@ export class CreateOrderComponent implements OnInit {
   fName: String = ""
   showTable = false
   listOfProduct: Products[] = [];
-  // productInCart: Number[] = [];
-  productInCart = new Map()
-  constructor( private loginService: LoginService , private order:OrdersService ) { }
+  // productInCart = new Map()
+  // productInCart = Number[]
+  constructor( private order:OrdersService , 
+     private storeObjects: StoreObjects  ) { }
   
   ngOnInit() {
     this.showTable = false
-    // this.loginService.setLoggedIn(true);
   }
 
   showProductsTable(value:boolean)
@@ -31,8 +34,6 @@ export class CreateOrderComponent implements OnInit {
   addRowToTable(arr:any , maxNumberOfIyems:string)
   {
     var productsTable = document.getElementById('productsInCartTable') as HTMLTableElement;
-    // console.log(row)
-        
     // var row = productsTable.insertRow(1).appendChild(row2) ;
     var row , cell;
     row = productsTable.insertRow(productsTable.rows.length) ;
@@ -79,15 +80,25 @@ export class CreateOrderComponent implements OnInit {
   
   ApplyOrder()
   {
-
- 
+    var pp:Products[] = []
+    this.storeObjects.products.subscribe(
+      res => (pp = res),
+      error => console.log("Error Occured retreving products from server! : ",error),
+      () => {},
+    )  ;
     var productsTable = document.getElementById('productsInCartTable') as HTMLTableElement;
 
+    var total = 0
+    var productPrice ;
+    var productInCart = []
     for(var i = 1 ; i < productsTable.rows.length  ; i++ )
     {
       var productId = Number(productsTable.rows[Number(i)].getElementsByClassName("id")[0].innerHTML) ;
       var numberOfPices =  Number(productsTable.rows[Number(i)].cells[9].getElementsByTagName('input')[0].value);
-      this.productInCart.set( productId , numberOfPices );
+      // var productPrice =  Number(productsTable.rows[Number(i)].getElementsByClassName("price")[0]) ;
+      // this.productInCart.set( productId , numberOfPices );
+      productInCart.push( productId  );
+      total += pp.filter(p => p.id === productId)[0].price * numberOfPices ;
     }
     const fName = (<HTMLInputElement>document.getElementById('fName')).value;
     const lName = (<HTMLInputElement>document.getElementById('lName')).value;
@@ -97,16 +108,22 @@ export class CreateOrderComponent implements OnInit {
     var customerName = fName + " " + lName
     var products = ""
     var arrOfProducts = []
-    for (let [key, value] of this.productInCart) {
-      arrOfProducts.push([key , value])
-      products = products + "ProductId: " +  key + " , NumberOfPices: " +value + " & ";
-      }
+    
+    // for (let [key, value] of this.productInCart) {
+      // arrOfProducts.push([key , value]) ;
+    //   products = products + "ProductId: " +  key + " , NumberOfPices: " +value + " & ";
+      
+    //   }
     // this.order.addOrder( products.substr(0 , products.length-2) , phoneNumber , customerName , date ).subscribe() ;
-    this.order.addOrder( arrOfProducts , phoneNumber , customerName , date ).subscribe() ;
-      console.log(arrOfProducts)
-    // this.order.addOrder( { "5" : 5, "6" :5} , "0568" , customerName , date )
-    this.productInCart.clear()
+    // this.order.addOrder( arrOfProducts , phoneNumber , customerName , date ).subscribe() ;
+    console.log("slknvlsdnvlksnjlksnvbjlk: ",total , " : " , productInCart , " : " )
+
+    this.order.addOrder(total , productInCart  , fName+" "+lName ).subscribe(x => console.log(x));
+
+    // this.productInCart.clear()
+    productInCart = [] ;
     
     }
+   
 
 }

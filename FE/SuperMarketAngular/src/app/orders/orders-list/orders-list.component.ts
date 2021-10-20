@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AsyncSubject, BehaviorSubject, ReplaySubject, Subject } from 'rxjs';
-import { LoginComponent } from 'src/app/login/login.component';
+import { LoginComponent } from 'src/app/auth/login/login.component';
 import { Order } from 'src/app/models/Order';
 import { OrdersService } from 'src/app/services/orders.service';
 import { StoreInterface } from 'src/app/store/store';

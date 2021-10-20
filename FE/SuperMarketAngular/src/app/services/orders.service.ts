@@ -1,9 +1,15 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
+import { map, shareReplay, tap } from 'rxjs/operators';
 import { Order } from '../models/Order';
 
+class OrderModel
+{
+    total:number  = 0;
+    products: number[] = [];
+    address: string='';
+}
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +21,21 @@ export class OrdersService {
   constructor(private http: HttpClient) { }
 
 
-  addOrder(order: Object , phone:String , name:String , date:String): Observable<Object> {
-    return this.http.post(this.url + "/order/"+name +"/"+ phone +"/"+ date , order );
+  // addOrder(order: Object , phone:String , name:String , date:String): Observable<Object> {
+  //   return this.http.post(this.url + "/order/"+name +"/"+ phone +"/"+ date , order );
+  // }
+
+
+  addOrder(total:number , products: number[] , address:string):Observable<Order> {
+    console.log("Addeddd") ;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+      })
+    };
+    // const s: OrderModel = {total: 1, products:[57], address: '123'};
+     return this.http.post<any>(this.url + '/Order/', {total , products , address } ,httpOptions  ).pipe(tap(x=>console.log('123')));
+    // return this.http.post(this.url + "/Order/" , {total ,  products, address}  );
   }
 
   getAllOrders():Observable<Array<Order>>

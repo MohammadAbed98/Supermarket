@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup , FormArray } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Products } from 'src/app/models/products';
 import { CommonService } from 'src/app/services/Common.Service';
-import { LoginService } from 'src/app/services/loginService.service';
 import { ProductService } from 'src/app/services/product.service';
 import { StoreObjects } from 'src/app/services/store.service';
 
@@ -28,7 +27,7 @@ export class AddProductComponent implements OnInit {
   // @ViewChild('productActiveInput', { static: false }) productActiveInput: ElementRef | undefined; // to pass local refernce to out of compnent
   
   constructor( private productService: ProductService , private commonService : CommonService ,
-     private fb:FormBuilder , private router: Router , private route: ActivatedRoute ,  private loginService: LoginService, private store:StoreObjects ) { }
+     private fb:FormBuilder , private router: Router , private route: ActivatedRoute, private store:StoreObjects ) { }
 
   productToBeUpdate: Products = new Products;
   addForm!: FormGroup;
@@ -59,11 +58,8 @@ export class AddProductComponent implements OnInit {
       id: 2,
       name: 'false'
     } ];
-    private setLoggedIn(value: boolean): void {
-      this.loginService.setLoggedIn(value);
-    }
+
   ngOnInit() {
-    this.setLoggedIn(true) ;
     this.product = new Products();
     this.id = this.route.snapshot.params['id'];
     // this.productService.getProduct(this.id).subscribe(product => this.productToBeUpdate = product) ;

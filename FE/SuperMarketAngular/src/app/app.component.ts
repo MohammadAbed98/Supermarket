@@ -1,7 +1,6 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { LoginService } from './services/loginService.service';
 import { StoreObjects } from './services/store.service';
 
 
@@ -18,7 +17,6 @@ export class AppComponent implements OnInit{
   public subscription!: Subscription;
 
   constructor(
-    private loginService: LoginService ,
     private router: Router,
     private store:StoreObjects
   ) {  }
@@ -37,9 +35,9 @@ export class AppComponent implements OnInit{
     this.store.init() ;
     // this.loginService.isLoggedIn.subscribe(value => { value ? this.router.navigate(['./products']) : this.router.navigate(['/login']); });  
         // get the current value
-    this.subscription = this.loginService.getLoggedIn().subscribe(value => {
-      this.userLoggedIn = value;
-  });
+  //   this.subscription = this.loginService.getLoggedIn().subscribe(value => {
+  //     this.userLoggedIn = value;
+  // });
   }
   ngOnDestroy(): void {
     if(this.subscription){
