@@ -3,18 +3,18 @@ import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from "@angular/r
 import { tap } from "lodash";
 import { Observable } from "rxjs";
 import { first } from "rxjs/operators";
-import { Products } from "../models/products";
+import { Product } from "../models/products";
 import { ProductService } from "../services/product.service";
 
 @Injectable()
-export class ProductResolver implements Resolve<Products>{
+export class ProductResolver implements Resolve<Product>{
 
     constructor(private productService:ProductService){
 
     }
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):
-    Observable<Products>  {
+    Observable<Product>  {
         // localhost:4200/products/angular-router-product
         const pId = parseInt(''+route.paramMap.get("id")) ;
         return this.productService.getProductById(57)

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Products } from '../models/products';
+import { Product } from '../models/products';
 import { shareReplay, tap, map, filter } from 'rxjs/operators';
 import { Order } from '../models/Order';
 
@@ -11,10 +11,10 @@ import { Order } from '../models/Order';
 export class ProductService {
 
   url: String = 'https://localhost:5001/api';
-  public products: Products[] = [];
+  public products: Product[] = [];
   constructor(private http: HttpClient) { }
 
-  getAllProducts(): Observable<Array<Products>> {
+  getAllProducts(): Observable<Array<Product>> {
     return this.http.get<any>(this.url +'/Product').pipe(
       map((result) => result.data),
       shareReplay(),
@@ -35,7 +35,7 @@ export class ProductService {
   //   return this.products;
   // }
 
-  addProduct(product: Products): Observable<Object> {
+  addProduct(product: Product): Observable<Object> {
     return this.http.post(this.url + "/Product/" , product );
   }
 
@@ -48,15 +48,15 @@ export class ProductService {
 
 
 
-  updateProduct(id: number, product: Products): Observable<Object> {
-    return this.http.put<Products>(this.url + "/Product/" + id ,  product);
+  updateProduct(id: number, product: Product): Observable<Object> {
+    return this.http.put<Product>(this.url + "/Product/" + id ,  product);
   }
 
   deleteProduct(id: number): Observable<any> {
-    return this.http.delete<Products>(this.url+"/Product/"+id);
+    return this.http.delete<Product>(this.url+"/Product/"+id);
   }
 
-  getSearchProductsList(searchStr: String): Observable<Array<Products>> {
+  getSearchProductsList(searchStr: String): Observable<Array<Product>> {
 
     return this.http.get<any>(this.url +'/Product/'  + searchStr ).pipe(
       map((result) => result.data),

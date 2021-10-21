@@ -1,16 +1,34 @@
+import { routerReducer } from '@ngrx/router-store';
 import {
-  ActionReducer,
   ActionReducerMap,
   createReducer,
+  MetaReducer,
   on,
 } from '@ngrx/store';
 import { CartActions } from 'src/app/orders/action-types';
+import { environment } from 'src/environments/environment';
 import { AuthState } from '../auth/reducer';
 
 export interface AppState {
   auth: AuthState;
   cart: CartState;
 }
+export const reducers: ActionReducerMap<any> = {
+  router: routerReducer 
+};
+export const metaReducers: MetaReducer<AppState>[] =
+    !environment.production ? [] : [];
+
+    //   export function logger(reducer:ActionReducer<any>)
+//       : ActionReducer<any> {
+//       return (state, action) => {
+//           console.log("state before: ", state);
+//           console.log("action", action);
+
+//           return reducer(state, action);
+//       }
+
+//   }
 
 /////////////////////////  CartState    ////////////////////////////////
 export interface CartState {
@@ -47,20 +65,7 @@ export const cartReducer = createReducer<any>(
   // })
 );
 
-// export const reducers: ActionReducerMap<AppState> = {
-//   auth: {} as ActionReducer<AuthState, Action>
-// };
 
-//   export function logger(reducer:ActionReducer<any>)
-//       : ActionReducer<any> {
-//       return (state, action) => {
-//           console.log("state before: ", state);
-//           console.log("action", action);
 
-//           return reducer(state, action);
-//       }
 
-//   }
 
-// export const metaReducers: MetaReducer<AppState>[] =
-//     !environment.production ? [] : [];

@@ -14,9 +14,14 @@ export const initAuthState: AuthState = {
 export const authReducer = createReducer(
   initAuthState,
   on(AuthActions.login, (state, action) => {
+
+    // state.user = action.user  // when get action of login type return the user in store 
+    // return state
+    // OR:
     return {
       user: action.user, // when get action of login type return the user in store 
     };
+
   }),
 
   on(AuthActions.logout, (state, action) => {

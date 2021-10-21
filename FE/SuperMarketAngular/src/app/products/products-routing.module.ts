@@ -3,12 +3,16 @@ import { RouterModule, Routes } from '@angular/router';
 import { AddProductComponent } from './add-product/add-product.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { ProductResolver } from './product.resolver';
+import { ProductsResolver } from './productsNgRxTools/products.resolver';
 import { UpdateProductComponent } from './update-product/update-product.component';
 
 const routes: Routes = [
   {
     path: '',
     component: ProductListComponent,
+    resolve: { // Befor routin to ProductListComponent => pass input from  ProductsResolver to variable with name ("products") in ProductListComponent
+      products: ProductsResolver
+    }
   },
   {
     path: 'updateProduct/:id',
@@ -21,13 +25,15 @@ const routes: Routes = [
     path: 'addProduct',
     component: AddProductComponent,
   },
+
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
   providers:[
-    ProductResolver
+    ProductsResolver,
+    ProductResolver,
   ]
 })
 export class ProductsRoutingModule {}

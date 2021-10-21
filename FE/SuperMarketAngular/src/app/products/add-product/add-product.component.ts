@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup , FormArray } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Products } from 'src/app/models/products';
+import { Product } from 'src/app/models/products';
 import { CommonService } from 'src/app/services/Common.Service';
 import { ProductService } from 'src/app/services/product.service';
 import { StoreObjects } from 'src/app/services/store.service';
@@ -29,12 +29,12 @@ export class AddProductComponent implements OnInit {
   constructor( private productService: ProductService , private commonService : CommonService ,
      private fb:FormBuilder , private router: Router , private route: ActivatedRoute, private store:StoreObjects ) { }
 
-  productToBeUpdate: Products = new Products;
+  productToBeUpdate: Product = new Product;
   addForm!: FormGroup;
   formArr!:FormArray ;
   show: boolean = false ;
   id: number = 0;
-  product: Products | undefined ;
+  product: Product | undefined ;
 
   
 
@@ -60,7 +60,7 @@ export class AddProductComponent implements OnInit {
     } ];
 
   ngOnInit() {
-    this.product = new Products();
+    this.product = new Product();
     this.id = this.route.snapshot.params['id'];
     // this.productService.getProduct(this.id).subscribe(product => this.productToBeUpdate = product) ;
     this.addForm = this.fb.group({
@@ -83,7 +83,7 @@ export class AddProductComponent implements OnInit {
     this.productService.addProduct(this.addForm.value)
     .subscribe(data => {
       console.log(" >>>>>>>>> ",data);
-      this.product = new Products();
+      this.product = new Product();
       this.gotoList();
     }, error => console.log("Error: ",error));
   }

@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from 'src/app/services/product.service';
-import { Products } from 'src/app/models/products';
+import { Product } from 'src/app/models/products';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { CommonService } from 'src/app/services/Common.Service';
 
@@ -12,10 +12,10 @@ import { CommonService } from 'src/app/services/Common.Service';
 })
 export class UpdateProductComponent implements OnInit {
 
-  productToBeUpdate: Products = new Products;
+  productToBeUpdate: Product = new Product;
   updatedForm!: FormGroup;
   id: number = 0;
-  product: Products | undefined ;
+  product: Product | undefined ;
 
   mySelect ='2';
   // selectedValue: boolean = this.productToBeUpdate.active;
@@ -91,7 +91,7 @@ export class UpdateProductComponent implements OnInit {
     this.productService.updateProduct(this.id, this.updatedForm.value)
       .subscribe(data => {
         console.log(data);
-        this.product = new Products();
+        this.product = new Product();
         this.gotoList();
       }, error => console.log(error));
 

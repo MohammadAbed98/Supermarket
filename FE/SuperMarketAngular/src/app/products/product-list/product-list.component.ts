@@ -1,9 +1,10 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { login } from 'src/app/auth/auth.action';
-import { Products } from 'src/app/models/products';
+import { Product } from 'src/app/models/products';
 import { isInCart } from 'src/app/orders/cart.selector';
 import { CreateOrderComponent } from 'src/app/orders/create-order/create-order.component';
 // import { inCart, outOfCart } from 'src/app/orders/orders.action';
@@ -23,7 +24,7 @@ export class ProductListComponent implements OnInit {
   testValue = true ;
   @ViewChild('searchStr', { static: false }) searchStr: ElementRef | undefined; // to pass local refernce to out of compnent
 
-  products!: Products[];
+  products!: Observable<Product[]>;
   scrollTableClass: String = '';
   constructor(
     private productService: ProductService,
@@ -38,9 +39,9 @@ export class ProductListComponent implements OnInit {
   public item: number = 0;
   public productState = new Map() ;
   public arrOfProducts = []
-  product!: Products;
-  listOfProduct: Products[] = [];
-  listOfProductInCart: Products[] = [];
+  product!: Product;
+  listOfProduct: Product[] = [];
+  listOfProductInCart: Product[] = [];
 
   ngOnInit() {
 
