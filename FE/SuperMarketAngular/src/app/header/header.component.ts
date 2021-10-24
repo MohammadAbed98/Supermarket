@@ -15,10 +15,8 @@ import { AppState } from '../reducer';
 })
 export class HeaderComponent implements OnInit {
  
-  loggedIn!: boolean;
 
   isLoggedIn!: Observable<boolean> ;
-  loading = true ;
   isLoggedOut!: Observable<boolean>;
   constructor( private store: Store<AppState>, 
      private router: Router , 
@@ -29,15 +27,12 @@ export class HeaderComponent implements OnInit {
     this.router.events.subscribe(event => {}) ;
     this.isLoggedIn = this.store
     .pipe(
-      // select(x =>  !!x.auth.user) 
       select(isLoggedIn) 
     );
     this.isLoggedOut = this.store
     .pipe(
      select(isLoggedOut)
-    //  select(x =>  !x.auth.user)
     );
-    // this.store.subscribe(state => console.log("Store Value: ", state))
   }
 
   Logout(){

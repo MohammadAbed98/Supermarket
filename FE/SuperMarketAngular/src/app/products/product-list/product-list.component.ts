@@ -1,8 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { filter } from 'lodash';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 import { login } from 'src/app/auth/auth.action';
 import { Product } from 'src/app/models/products';
 import { isInCart } from 'src/app/orders/cart.selector';
@@ -12,6 +13,9 @@ import { inCart } from 'src/app/orders/orders.action';
 import { AppState, CartState } from 'src/app/reducer';
 import { ProductService } from 'src/app/services/product.service';
 import { StoreObjects } from 'src/app/services/store.service';
+import { deleteProductById } from '../productsNgRxTools/products.action';
+import { ProductsState, selectAll } from '../productsNgRxTools/products.reducer';
+import { selectAllProducts } from '../productsNgRxTools/products.selectors';
 
 @Component({
   selector: 'app-product-list',
@@ -24,14 +28,15 @@ export class ProductListComponent implements OnInit {
   testValue = true ;
   @ViewChild('searchStr', { static: false }) searchStr: ElementRef | undefined; // to pass local refernce to out of compnent
 
-  products!: Observable<Product[]>;
+  products$!: Observable<Product[]>;
   scrollTableClass: String = '';
   constructor(
     private productService: ProductService,
     private router: Router,
     private order: CreateOrderComponent,
     private storeObjects: StoreObjects,
-    private appStore: Store<AppState>
+    private appStore: Store<AppState>,
+    private appStoreProducts: Store<ProductsState>
   ) {}
   public viewHeader = true;
   public displayCart = false;
@@ -40,55 +45,71 @@ export class ProductListComponent implements OnInit {
   public productState = new Map() ;
   public arrOfProducts = []
   product!: Product;
-  listOfProduct: Product[] = [];
+  // listOfProduct: Product[] = [];
   listOfProductInCart: Product[] = [];
+
+
 
   ngOnInit() {
 
+console.log("products: " , this.products$);
 
-    const productsFromStore = this.storeObjects.products;
-    // this.productInCart = []
+    // const productsFromStore = this.storeObjects.products;
     this.href = this.router.url;
     if (this.router.url == '/orders/creat-order') {
       this.displayCart = true;
       this.viewHeader = false;
       this.scrollTableClass = 'table-scroll';
-      // this.changeIcons()
     } else {
       this.displayCart = false;
     }
-    // this.displayCart = false
-    this.ReloadDataFromStore();
+    // this.ReloadDataFromStore(); // load products from store 
+    this.reloadData() ;
     // productsFromStore.subscribe(
     //   res => (this.listOfProduct = res),
     //   error => console.log("Error Occured retreving products from server! : ",error),
     //   () => {}
     // )  ;
   }
-  
+
 
   reloadData() {
-    this.productService.getAllProducts().subscribe(
-      (res) => (this.listOfProduct = res),
-      (error) =>
-        console.log('Error Occured retreving products from server! : ', error),
-      () => {}
-    );
+    // console.log("from Loading");
+    // this.appStoreProducts.pipe(
+    //   tap((r) => console.log("rrrrrrrrrr>> ",r)
+    //   ) ,
+    //   select(selectAllProducts)).subscribe(
+    //             (error) =>
+    //       console.log('Error Occured retreving products from server! : ', error),
+        
+    //   );
+
+      this.products$ = this.appStoreProducts.pipe(select(selectAllProducts));
+
+      // load products from database: 
+    // this.productService.getAllProducts().subscribe(
+    //   (res) => (this.listOfProduct = res),
+    //   (error) =>
+    //     console.log('Error Occured retreving products from server! : ', error),
+    //   () => {}
+    // );
 
     // this.products = this.productService.getProductsList() ;
     // this.productService.getProductsList() ;
   }
 
-  deleteProduct(id: number) {
-    this.productService.deleteProduct(id).subscribe(
-      (data) => {
-        // this.reloadData();
-        this.storeObjects.init();
-      },
-      (error) => console.log(error)
-    );
-    this.ngOnInit();
-  }
+deleteProduct(id: number) {
+
+  this.appStoreProducts.dispatch(deleteProductById({ productId: id }));
+    
+        // this.productService.deleteProduct(id).subscribe(
+    //   (data) => {
+    //     // this.reloadData();
+    //     this.storeObjects.init();
+    //   },
+    //   (error) => console.log(error)
+    // );
+}
   GetDetails(value: any) {
   }
 
@@ -183,24 +204,27 @@ export class ProductListComponent implements OnInit {
       // const newCartAction = outOfCart({ isInCart: false , dangerClasses:this.productState });
       // this.appStore.dispatch(newCartAction);
     }
-    this.initIcons(55);
+    // this.initIcons(55);
   }
-  updateProduct(id: number) {
-    // window.open("https://www.youtube.com/watch?v=W4qd5gITe8c","_self")
-    // location.href = "https://www.youtube.com/watch?v=W4qd5gITe8c"
-    this.router.navigate(['updateProduct', id]);
+  
+  getProductsByName() {
+    return this.products$.pipe(
+      map(projects => projects.filter((products) =>
+              products.name.includes(this.searchStr?.nativeElement.value) ))
+    );
   }
 
   myFunction() {
     if (this.searchStr?.nativeElement.value == '') {
-      // this.reloadData()
-      this.ReloadDataFromStore();
+      this.reloadData()
+      // this.ReloadDataFromStore();
     } else {
       // filter on data from store:
       this.storeObjects.products.subscribe((products) => {
-        this.listOfProduct = products.filter((products) =>
-          products.name.includes(this.searchStr?.nativeElement.value)
-        );
+        this.products$.subscribe(
+          (products) => this.products$ =  this.getProductsByName()
+        )
+
       });
       //  fromEvent<any>(this.searchStr?.nativeElement, 'keyup').pipe(
       //   map(e=>e.target.value),
@@ -218,14 +242,41 @@ export class ProductListComponent implements OnInit {
     }
   }
 
-  ReloadDataFromStore() {
-    this.storeObjects.products.subscribe(
-      (res) => (this.listOfProduct = res),
-      (error) =>
-        console.log('Error Occured retreving products from server! : ', error),
-      () => {}
-    );
-  }
+  // myFunction() {
+  //   if (this.searchStr?.nativeElement.value == '') {
+  //     // this.reloadData()
+  //     this.ReloadDataFromStore();
+  //   } else {
+  //     // filter on data from store:
+  //     this.storeObjects.products.subscribe((products) => {
+  //       this.listOfProduct = products.filter((products) =>
+  //         products.name.includes(this.searchStr?.nativeElement.value)
+  //       );
+  //     });
+  //     //  fromEvent<any>(this.searchStr?.nativeElement, 'keyup').pipe(
+  //     //   map(e=>e.target.value),
+  //     //   // throttle(() => interval(500)),
+  //     //   debounceTime(400),
+  //     //   distinctUntilChanged(),
+  //     //   switchMap(event=> this.productService.getSearchProductsList(event)) ,
+  //     //   take(1) ,
+  //     //   // tap(s => console.log(s))
+  //     // ).subscribe(x=>{this.listOfProduct =x});
+  //     // this.products = this.productService.getSearchProductsList(this.searchStr)
+  //     // this.productService.getSearchProductsList(this.searchStr?.nativeElement.value).subscribe(product => this.listOfProduct=product) ;
+  //     // this.productService.getSearchProductsList(this.searchProductStr).subscribe(product => this.listOfProduct=product) ;
+  //     // console.log(this.searchStr?.nativeElement.value)
+  //   }
+  // }
+
+  // ReloadDataFromStore() {
+  //   this.storeObjects.products.subscribe(
+  //     (res) => (this.listOfProduct = res),
+  //     (error) =>
+  //       console.log('Error Occured retreving products from server! : ', error),
+  //     () => {}
+  //   );
+  // }
 
 
   initIcons(id: number){

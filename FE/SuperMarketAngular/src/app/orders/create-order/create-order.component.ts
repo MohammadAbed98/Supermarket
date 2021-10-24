@@ -12,8 +12,6 @@ export class CreateOrderComponent implements OnInit {
   fName: String = '';
   showTable = false;
   listOfProduct: Product[] = [];
-  // productInCart = new Map()
-  // productInCart = Number[]
   constructor(
     private order: OrdersService,
     private storeObjects: StoreObjects
@@ -25,7 +23,6 @@ export class CreateOrderComponent implements OnInit {
 
   showProductsTable(value: boolean) {
     this.showTable = value;
-    // this.product.changeIcons
   }
 
   addRowToTable(arr: any, maxNumberOfIyems: string) {

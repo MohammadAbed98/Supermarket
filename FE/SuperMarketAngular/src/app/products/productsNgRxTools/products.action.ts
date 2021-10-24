@@ -1,3 +1,4 @@
+import { Update } from "@ngrx/entity";
 import { createAction, props } from "@ngrx/store";
 import { Product } from "src/app/models/products";
 
@@ -13,3 +14,32 @@ export const allProductsLoaded = createAction(
     props<{products: Product[]}>()
 );
 
+export const deleteProductById = createAction(
+    "[Delete Product Effect] Product delete" , 
+    props<{productId: number}>()
+);
+
+export const productDeleted = createAction(
+    "[Delete Product Effect] Product deleted" , 
+    props<{productId: number}>()
+);
+
+export const updateProduct = createAction(
+    "[Update Product Effect] Product Update" , 
+    props<{ pId:number , product: Update<Product>}>()
+);
+
+export const productUpdated = createAction(
+    "[Update Product Effect] Product Updated" , 
+    props<{ product: Update<Product>}>()
+);
+
+export const addProduct = createAction(
+    "[Add Product Effect] " , 
+    props<{ product:Product}>()
+);
+
+export const productAdded = createAction(
+    "[Add Product Effect] Product Added" , 
+    props<{ product: Product}>()
+);

@@ -4,7 +4,6 @@ import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { login } from './auth/auth.action';
 import { AppState } from './reducer';
-import { ProductService } from './services/product.service';
 import { StoreObjects } from './services/store.service';
 
 
@@ -21,7 +20,6 @@ export class AppComponent implements OnInit{
   public subscription!: Subscription;
 
   constructor(
-    private productListService: ProductService,
     private storeObject:StoreObjects , 
     private store: Store<AppState>
   ) {  }

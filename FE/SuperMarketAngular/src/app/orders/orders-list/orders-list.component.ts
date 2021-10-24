@@ -18,7 +18,6 @@ export class OrdersListComponent implements OnInit {
  
   }
 ordersList:Order[] = [] ;
-// ordersListFilter:Order[] = [] ;
 
   ngOnInit(): void {
   }

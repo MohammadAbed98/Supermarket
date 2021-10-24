@@ -38,7 +38,9 @@
             </tr>
           </thead>
           <tbody>  
-            <tr *ngFor="let product of listOfProduct">
+            <div style="color: red;" *ngIf="(products$ | async)?.length==0"> <strong>No records found.</strong> </div>
+
+            <tr  *ngFor="let product of (products$ | async )" >
               <td class="id">{{product.id}}</td>
               <td class="name">{{product.name}}</td>
               <td class="price">{{product.price}}</td>
@@ -49,7 +51,7 @@
               <td class="dimentions">{{product.length}} * {{product.width}} * {{product.height}}</td>
               <td class="made_in">{{product.made_in}}</td>
               <td class="active">{{product.active}}</td>
-  
+
               <!-- <ul>
                 <li *ngFor="let item of items; let i = index" [attr.data-index]="i">
                     {{item}}
@@ -75,8 +77,8 @@
       </div>
     </div>
     
-  <div >
-    {{products | async | json}}
-  </div>
-    
+  <!-- <div >
+    {{products$ | async| json }}
+  </div> -->
+
     

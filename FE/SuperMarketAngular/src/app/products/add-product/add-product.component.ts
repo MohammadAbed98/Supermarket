@@ -1,10 +1,13 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup , FormArray } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { Product } from 'src/app/models/products';
 import { CommonService } from 'src/app/services/Common.Service';
 import { ProductService } from 'src/app/services/product.service';
 import { StoreObjects } from 'src/app/services/store.service';
+import { addProduct } from '../productsNgRxTools/products.action';
+import { ProductsState } from '../productsNgRxTools/products.reducer';
 
 @Component({
   selector: 'app-add-product',
@@ -26,15 +29,14 @@ export class AddProductComponent implements OnInit {
   @ViewChild('productMadeInInput', { static: false }) productMadeInInput: ElementRef | undefined; // to pass local refernce to out of compnent
   // @ViewChild('productActiveInput', { static: false }) productActiveInput: ElementRef | undefined; // to pass local refernce to out of compnent
   
-  constructor( private productService: ProductService , private commonService : CommonService ,
-     private fb:FormBuilder , private router: Router , private route: ActivatedRoute, private store:StoreObjects ) { }
+  constructor(
+     private commonService : CommonService ,
+     private fb:FormBuilder , 
+     private route: ActivatedRoute, 
+     private appStoreProducts: Store<ProductsState> ) { }
 
-  productToBeUpdate: Product = new Product;
   addForm!: FormGroup;
-  formArr!:FormArray ;
-  show: boolean = false ;
   id: number = 0;
-  product: Product | undefined ;
 
   
 
@@ -60,9 +62,7 @@ export class AddProductComponent implements OnInit {
     } ];
 
   ngOnInit() {
-    this.product = new Product();
     this.id = this.route.snapshot.params['id'];
-    // this.productService.getProduct(this.id).subscribe(product => this.productToBeUpdate = product) ;
     this.addForm = this.fb.group({
       name:[''],
       price:[''],
@@ -79,23 +79,20 @@ export class AddProductComponent implements OnInit {
     }) ;
 
   }
-  addProduct(){
-    this.productService.addProduct(this.addForm.value)
-    .subscribe(data => {
-      console.log(" >>>>>>>>> ",data);
-      this.product = new Product();
-      this.gotoList();
-    }, error => console.log("Error: ",error));
-  }
+  // addProduct(){
+  //   this.appStoreProducts.dispatch(addProduct(this.addForm.value)) ;
+  //   // this.productService.addProduct(this.addForm.value)
+  //   // .subscribe(data => {
+  //   //   console.log(" >>>>>>>>> ",data);
+  //   //   this.product = new Product();
+  //   //   this.gotoList();
+  //   // }, error => console.log("Error: ",error));
+  // }
 
 add(){
-  
-  console.log(this.productMadeInInput?.nativeElement.value)
   this.addForm.setValue({
     name: this.productNameInput?.nativeElement.value ,
     price: parseFloat(this.productPriceInput?.nativeElement.value),
-    // production_date: "10/6/2021 12:19:25 PM",
-    // expiry_date: "10/6/2021 12:19:25 PM" ,
     production_date: "" + this.productProductionDateInput?.nativeElement.value ,
     expiry_date: "" + this.productExpiryDateInput?.nativeElement.value ,
     number_of_items: parseInt(this.productNumberOfItemsInput?.nativeElement.value)  ,
@@ -105,14 +102,9 @@ add(){
     height: parseInt(this.productHeightInput?.nativeElement.value ),
     length: parseInt(this.productlengthInput ?.nativeElement.value) ,
     active: Boolean(this.selectedValue)
-    // active:true
   }) ;
-  this.addProduct(  );    
-}
-gotoList() {
-  this.store.init() ;
+  this.appStoreProducts.dispatch(addProduct(this.addForm.value)) ;
 
-  this.router.navigate(['/products']);
 }
  
 addRow() {

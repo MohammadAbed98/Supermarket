@@ -6,63 +6,49 @@ import { shareReplay, tap, map, filter } from 'rxjs/operators';
 import { Order } from '../models/Order';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProductService {
-
   url: String = 'https://localhost:5001/api';
   public products: Product[] = [];
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getAllProducts(): Observable<Array<Product>> {
-    return this.http.get<any>(this.url +'/Product').pipe(
+    return this.http.get<any>(this.url + '/Product').pipe(
       map((result) => result.data),
-      shareReplay(),
-    );  
+      shareReplay()
+    );
   }
-
-  //   getProductsList(): Products[] {
-
-  //     this.getAllProducts().subscribe(
-  //       res =>    console.log(this.products = res),
-  //       error => console.log("Error Occured retreving products from server! : ",error),
-  //       () => {}
-  //     )  ;
-  
-  //     // console.log(" >>>> 5555" , this.products);
-    
-
-  //   return this.products;
-  // }
-
-  addProduct(product: Product): Observable<Object> {
-    return this.http.post(this.url + "/Product/" , product );
+  addProduct(product:  Partial<Product>) {    
+    return this.http
+      .post<any>(this.url + '/Product/', product)
+      .pipe(map((res) => res.data));
   }
 
   getProductById(id: number): Observable<any> {
-    return this.http.get<any>(this.url + "/Product/getProductById/" + id ).pipe(
+    return this.http.get<any>(this.url + '/Product/getProductById/' + id).pipe(
       map((result) => result.data),
       shareReplay()
-    ); ;
+    );
   }
 
-
-
-  updateProduct(id: number, product: Product): Observable<Object> {
-    return this.http.put<Product>(this.url + "/Product/" + id ,  product);
+  updateProduct(id: number, body: Partial<Product>) {
+    return this.http
+      .put<any>(this.url + '/Product/' + id, body)
+      .pipe(map((response) => response?.data));
   }
 
-  deleteProduct(id: number): Observable<any> {
-    return this.http.delete<Product>(this.url+"/Product/"+id);
+  deleteProduct(id: number): Observable<Product> {
+    return this.http
+      .delete<any>(this.url + '/Product/' + id)
+      .pipe(map((response) => response?.data));
   }
 
   getSearchProductsList(searchStr: String): Observable<Array<Product>> {
-
-    return this.http.get<any>(this.url +'/Product/'  + searchStr ).pipe(
+    return this.http.get<any>(this.url + '/Product/' + searchStr).pipe(
       map((result) => result.data),
       shareReplay()
     );
     // return this.http.get<any>(this.url + "/Product/" + searchStr );
   }
-
 }
