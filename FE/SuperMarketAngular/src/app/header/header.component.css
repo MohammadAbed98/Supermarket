@@ -1,15 +1,18 @@
-nav
-{
-   position: fixed ;
-   top: 0;
-   width: 100%;
+nav {
+  position: fixed;
+  top: 0;
+
+  z-index: 1000;
+
+  left: 0;
+  width: 100%;
 }
-.activeBtn{
-    background-color: snow;
+.activeBtn {
+  background-color: snow;
 }
 
-li{
-    display:inline-block;
+li {
+  display: inline-block;
 }
 
 /* .navbar-nav li:hover>.dropdown-menu {

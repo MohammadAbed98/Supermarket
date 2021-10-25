@@ -52,5 +52,10 @@ export class OrdersService {
     return this.http.get<any>(this.url + '/Order/' + id) ;
   }
 
+  DeleteOrderById(id: number):Observable<Order>
+  {
+    return this.http.delete<any>(this.url + '/Order/' + id) ;
+  }
+
 
 }

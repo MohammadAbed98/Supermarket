@@ -20,6 +20,7 @@ export class OrdersListComponent implements OnInit {
 ordersList:Order[] = [] ;
 
   ngOnInit(): void {
+    this.getAllOrders() ;
   }
 
 
@@ -27,7 +28,7 @@ ordersList:Order[] = [] ;
   getAllOrders()
   {
     this.orderService.getAllOrders().subscribe(
-      res => {(this.ordersList = res); console.log(res)}
+      res => {(this.ordersList = res)}
     ) ;
 
 //     this.orderService.getAllOrders().subscribe(
@@ -46,6 +47,11 @@ ordersList:Order[] = [] ;
     ) ;
   }
 
+  deleteOrder(id:number){
+    this.orderService.DeleteOrderById(id).subscribe() ;
+    this.getAllOrders() ;
+
+  }
   Subjects()
   {
     // const subject = new Subject() ;
