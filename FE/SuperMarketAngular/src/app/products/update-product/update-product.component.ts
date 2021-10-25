@@ -1,12 +1,11 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ProductService } from 'src/app/services/product.service';
-import { Product } from 'src/app/models/products';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { CommonService } from 'src/app/services/Common.Service';
 import { Store } from '@ngrx/store';
+import { Product } from 'src/app/models/products';
+import { CommonService } from 'src/app/services/Common.Service';
 import { updateProduct } from '../productsNgRxTools/products.action';
 import { ProductsState } from '../productsNgRxTools/products.reducer';
+import { selectedProduct } from '../productsNgRxTools/products.selectors';
 
 @Component({
   selector: 'app-update-product',
@@ -14,7 +13,7 @@ import { ProductsState } from '../productsNgRxTools/products.reducer';
   styleUrls: ['./update-product.component.css'],
 })
 export class UpdateProductComponent implements OnInit {
-  productToBeUpdate: Product = new Product();
+  productToBeUpdate!: Product;
   updatedForm!: FormGroup;
   id: number = 0;
 
@@ -64,13 +63,9 @@ export class UpdateProductComponent implements OnInit {
   // constructor(private route: ActivatedRoute,private router: Router,
   //   private productService: ProductService) { }
   constructor(
-    private productService: ProductService,
     private commonService: CommonService,
     private fb: FormBuilder,
-    private router: Router,
-    private route: ActivatedRoute,
     private appStore: Store<ProductsState>
-
   ) {}
 
   ngOnInit() {
@@ -79,10 +74,13 @@ export class UpdateProductComponent implements OnInit {
 
     // this.setLoggedIn(true) ;
     // this.product = new Products();
-    this.id = this.route.snapshot.params['id'];
-    this.productService
-      .getProductById(this.id)
-      .subscribe((product) => (this.productToBeUpdate = product));
+    // this.id = this.route.snapshot.params['id'];
+    this.appStore
+      .select(selectedProduct)
+      .subscribe((x) => (this.productToBeUpdate = x));
+    // this.productService
+    //   .getProductById(this.id)
+    //   .subscribe((product) => (this.productToBeUpdate = product));
     // this.productService.getProduct(this.id).subscribe(product2 => this.productToBeUpdate = product2) ;
     // this.mySelect = (this.product.active == true)?'1':'2';
     // console.log("::::::::::::::" + this.productToBeUpdate.active  )
@@ -111,7 +109,7 @@ export class UpdateProductComponent implements OnInit {
       this.data
     )[0].name;
   }
- 
+
   update() {
     // console.log(this.productMadeInInput?.nativeElement.value)
     this.updatedForm.setValue({
@@ -131,19 +129,20 @@ export class UpdateProductComponent implements OnInit {
       active: Boolean(this.selectedValue),
     });
 
-    this.appStore.dispatch(updateProduct({ pId: this.id , product:this.updatedForm.value }));
-
+    this.appStore.dispatch(
+      updateProduct({ pId: this.id, product: this.updatedForm.value })
+    );
   }
 
-   // updateProduct() {
-    // this.productService
-    //   .updateProduct(this.id, this.updatedForm.value)
-    //   .subscribe(
-    //     (data) => {
-    //       console.log(data);
-    //       this.product = new Product();
-    //     },
-    //     (error) => console.log(error)
-    //   );
+  // updateProduct() {
+  // this.productService
+  //   .updateProduct(this.id, this.updatedForm.value)
+  //   .subscribe(
+  //     (data) => {
+  //       console.log(data);
+  //       this.product = new Product();
+  //     },
+  //     (error) => console.log(error)
+  //   );
   // }
 }

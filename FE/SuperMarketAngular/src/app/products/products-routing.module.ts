@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AddProductComponent } from './add-product/add-product.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { ProductResolver } from './product.resolver';
+// import { ProductResolver } from './product.resolver';
 import { ProductsResolver } from './productsNgRxTools/products.resolver';
 import { UpdateProductComponent } from './update-product/update-product.component';
 

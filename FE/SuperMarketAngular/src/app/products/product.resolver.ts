@@ -1,25 +1,18 @@
-import { Injectable } from "@angular/core";
-import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from "@angular/router";
-import { tap } from "lodash";
-import { Observable } from "rxjs";
-import { first } from "rxjs/operators";
-import { Product } from "../models/products";
-import { ProductService } from "../services/product.service";
+import { Injectable } from '@angular/core';
+import { ActivatedRouteSnapshot, Resolve } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { Observable, of } from 'rxjs';
+import { Product } from '../models/products';
+import { loadProductById } from './productsNgRxTools/products.action';
+import { ProductsState } from './productsNgRxTools/products.reducer';
 
 @Injectable()
-export class ProductResolver implements Resolve<Product>{
+export class ProductResolver implements Resolve<Product> {
+  constructor(private store: Store<ProductsState>) {}
 
-    constructor(private productService:ProductService){
-
-    }
-
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):
-    Observable<Product>  {
-        // localhost:4200/products/angular-router-product
-        const pId = parseInt(''+route.paramMap.get("id")) ;
-        return this.productService.getProductById(57)
-        .pipe(
-            first() 
-        ) ;
-    }
+  resolve(route: ActivatedRouteSnapshot): Observable<any> {
+    // localhost:4200/products/angular-router-product
+    const productId = parseInt('' + route.paramMap.get('id'));
+    return of(this.store.dispatch(loadProductById({ productId })));
+  }
 }
