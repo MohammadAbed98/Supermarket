@@ -17,7 +17,7 @@ namespace Supemarket.Repositories.Orders
         public Task<List<Order>> GetAllOrders();
         public Order GetById(int id);
         public bool DeleteOrder(Order deletedOrder);
-        public bool UpdateOrder(int id , Order updatedOrder);
+        public Order UpdateOrder(int id, Order updatedOrder);
         public Order Find(int id);
 
         public void save();
@@ -26,9 +26,9 @@ namespace Supemarket.Repositories.Orders
     }
     public class OrderRepo : IOrderRepo
     {
-        private readonly SupermarketDbContext _db ;
+        private readonly SupermarketDbContext _db;
 
-       
+
 
         //private static List<Product> products = new List<Product>
         //{
@@ -54,19 +54,20 @@ namespace Supemarket.Repositories.Orders
                 var serviceResponse = new ServiceResponse<Order>();
                 _db.Orders.Add(newOrder);
                 _db.SaveChanges();
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 success = false;
             }
-           
+
             return success;
         }
         public async Task<List<Order>> GetAllOrders()
         {
             try
             {
-                return  await _db.Orders
-                    .Include( o => o.products)
+                return await _db.Orders
+                    .Include(o => o.products)
                     .ToListAsync();
             }
             catch (Exception e)
@@ -75,7 +76,7 @@ namespace Supemarket.Repositories.Orders
             }
 
         }
-        
+
         public Order GetById(int id)
         {
             try
@@ -84,12 +85,13 @@ namespace Supemarket.Repositories.Orders
                 o = Find(id);
                 return _db.Orders
                     .Include(o => o.products).FirstOrDefault(p => p.id == id);
-                    //.Include(o => o.products() ) ;
-            }catch(Exception)
+                //.Include(o => o.products() ) ;
+            }
+            catch (Exception)
             {
                 return null;
             }
-          
+
         }
 
         public bool DeleteOrder(Order deletedOrder)
@@ -99,44 +101,39 @@ namespace Supemarket.Repositories.Orders
             {
                 _db.Orders.Remove(deletedOrder);
                 _db.SaveChanges();
-            }catch(Exception e)
-            {
-                success = false;
-            }
-                
-
-            return success;
-        }
-
-
-            public bool UpdateOrder(int id , Order updatedOrder)
-            {
-            bool success = true;
-            try
-            {
-                var serviceResponse = new ServiceResponse<Order>();
-                Order toUpdateOrder = Find(id); 
-                toUpdateOrder.address = updatedOrder.address;
-                toUpdateOrder.listOfProducts = updatedOrder.listOfProducts;
-                //toUpdateOrder.products = updatedOrder.products;
-                toUpdateOrder.total = updatedOrder.total;
-                _db.SaveChanges();
             }
             catch (Exception e)
             {
                 success = false;
             }
+
+
             return success;
         }
-        public Order Find(int id)
-        {
-            return _db.Orders.FirstOrDefault(p => p.id == id);
-        }
 
-        public void save()
+
+        public Order UpdateOrder(int id, Order updatedOrder)
         {
-            _db.SaveChangesAsync();
+            var serviceResponse = new ServiceResponse<Order>();
+            Order toUpdateOrder = Find(id);
+            if (toUpdateOrder is null)
+                return null;
+            toUpdateOrder.address = updatedOrder.address;
+            toUpdateOrder.listOfProducts = updatedOrder.listOfProducts;
+            toUpdateOrder.total = updatedOrder.total;
+            _db.SaveChanges();
+        
+            return toUpdateOrder;
         }
+public Order Find(int id)
+{
+    return _db.Orders.FirstOrDefault(p => p.id == id);
+}
+
+public void save()
+{
+    _db.SaveChangesAsync();
+}
 
  
     }

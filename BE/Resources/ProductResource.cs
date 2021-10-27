@@ -16,7 +16,6 @@ namespace Supemarket.Resources
         public int number_of_items { get; set; } = 12;
         public ProductTypesModel category { get; set; } = ProductTypesModel.chips;
         public String made_in { get; set; }
-        //public String parcode { get; set; } = "NULL";
         public double width { get; set; }
         public double height { get; set; }
         public double length { get; set; }

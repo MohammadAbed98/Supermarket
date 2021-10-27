@@ -4,6 +4,7 @@
 </head>
 <div class="container">
 <h3>Add Product</h3>
+<form [formGroup]="addForm">
 <table form="rowForm" class="table table-striped" width="100%" id="myTable" >
   <thead>
     <tr>
@@ -21,46 +22,46 @@
   </thead>
   <tbody>  
 
-      <td ><input type="text" class="form-control is-valid" style="width: 90%;text-align: center;"  #productNameInput ></td>
-      <td ><input type="text" class="form-control is-valid" style="width: 90%;text-align: center;"  #productPriceInput ></td>
-      <td ><input type="Date" class="form-control is-valid" style="width: 90%;text-align: center;"  #productProductionDateInput ></td>
-      <td ><input type="Date" class="form-control is-valid" style="width: 90%;text-align: center;"  #productExpiryDateInput></td>
-      <td ><input type="text" class="form-control is-valid" style="width: 90%;text-align: center;"  #productNumberOfItemsInput></td>
-      <td ><input type="text" class="form-control is-valid" style="width: 90%;text-align: center;"  #productCategoryInput></td>
+      <td ><input type="text" class="form-control is-valid" style="width: 90%;text-align: center;" formControlName="name" ></td>
+      <td ><input type="number" class="form-control is-valid" style="width: 90%;text-align: center;" formControlName= "price" ></td>
+      <td ><input type="Date" class="form-control is-valid" style="width: 90%;text-align: center;" formControlName= "production_date" ></td>
+      <td ><input type="Date" class="form-control is-valid" style="width: 90%;text-align: center;" formControlName= "expiry_date"></td>
+      <td ><input type="number" class="form-control is-valid" style="width: 90%;text-align: center;" formControlName= "number_of_items"></td>
+      <td ><input type="number" class="form-control is-valid" style="width: 90%;text-align: center;" formControlName= "category"></td>
       <td width="10%" >
      
           <tr >
-            <td class="dimentiosCell"><input type="text" class="form-control is-valid" style="width: 85%;"  #productlengthInput></td>
+            <td class="dimentiosCell"><input type="number" class="form-control is-valid" style="width: 85%;"  formControlName="length"></td>
             <td class="dimentiosCell"><label style="font-size: 20px; margin: 0vw;"> * </label></td>
           </tr>
           <tr >
-            <td class="dimentiosCell"><input type="text" class="form-control is-valid" style="width: 85%;"  #productwidthInput ></td>
+            <td class="dimentiosCell"><input type="number" class="form-control is-valid" style="width: 85%;"  formControlName="width" ></td>
             <td class="dimentiosCell"><label style="font-size: 20px; margin: 0vw;"> * </label></td>
           </tr>
           <tr >
-            <td class="dimentiosCell"><input type="text" class="form-control is-valid" style="width: 85%;"  #productHeightInput> </td>
+            <td class="dimentiosCell"><input type="number" class="form-control is-valid" style="width: 85%;"  formControlName="height"> </td>
           </tr>
       </td> 
-      <td ><input type="text" class="form-control is-valid" style="width: 90%;text-align: center;"  #productMadeInInput></td>
+      <td ><input type="text" class="form-control is-valid" style="width: 90%;text-align: center;"  formControlName="made_in"></td>
       <td >
-        <select name="my-select" [(ngModel)]="mySelect" (change)="selectChange()">
+        <select name="my-select" [(ngModel)]="mySelect" (change)="selectChange()" formControlName="active">
             <option [value]="item.id" *ngFor="let item of data">
                 {{item.name}}
             </option>
         </select>
-        <!-- <div>
-        {{selectedValue}}
-        </div> -->
-          <!-- <input type="text" class="form-control is-valid" style="width: 90%;text-align: center;"  #productActiveInput > -->
-    </td>
+          </td>
+
+    
   </tbody>
   <a (click)="addRow()" style="font-size:18px;cursor: cell;margin-right: 5%;" > <i class="fa fa-plus-circle"></i>Add Product</a>
 
 </table>
+    </form>
 
-    <button type="submit" [routerLink]='["/products"]' class="btn btn-success" (click)="add()">Submit</button>
-
-
+    <button type="submit" [routerLink]='[validProductInfo ? "./" : "/products"]'  class="btn btn-success" (click)="addProduct()">Submit</button>
+    <div *ngIf="validProductInfo" style="color: red;" class="test"> <strong> Make sure to fil all feilds </strong> </div>
+  <!-- <br> -->
+    <!-- <label style="color: red;" class="validError"><strong>  Make sure to fil all feilds</strong></label> -->
 <!-- <a routerLink="../products"><input class="btn btn-primary" type="submit" value="Submit"></a> -->
 
 

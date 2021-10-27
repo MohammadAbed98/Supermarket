@@ -16,7 +16,6 @@ import { StoreObjects } from './services/store.service';
 export class AppComponent implements OnInit{
 
   
-  public userLoggedIn!: boolean;
   public subscription!: Subscription;
 
   constructor(
@@ -35,14 +34,6 @@ export class AppComponent implements OnInit{
     this.storeObject.init() ; // To get all products and store them in store 
 
   }
-  ngOnDestroy(): void {
-    if(this.subscription){
-        this.subscription.unsubscribe();
-    }
- 
- }
-  btnName = 'SuperMarketAngular';
-
 
 }
  

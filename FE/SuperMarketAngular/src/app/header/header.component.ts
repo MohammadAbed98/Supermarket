@@ -29,16 +29,16 @@ export class HeaderComponent implements OnInit {
     .pipe(
       select(isLoggedIn) 
     );
-    this.isLoggedOut = this.store
-    .pipe(
-     select(isLoggedOut)
-    );
+    // this.isLoggedOut = this.store
+    // .pipe(
+    //  select(isLoggedOut)
+    // );
   }
 
   Logout(){
     // throw logout action 
-    const newLoginAction = logout() ; 
-    this.appStore.dispatch(newLoginAction) ;
+    const newLogoutAction = logout() ; 
+    this.appStore.dispatch(newLogoutAction) ;
   
   }
 

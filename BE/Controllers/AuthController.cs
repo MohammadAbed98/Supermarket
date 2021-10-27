@@ -21,11 +21,5 @@ namespace Supemarket.Controllers
             return u;
         }
 
-        //[HttpGet]
-        //[Route("login/{email}/{password}")]
-        //public Boolean login(string email, string password)
-        //{
-        //    return true;
-        //}
     }
 }

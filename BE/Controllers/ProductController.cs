@@ -18,22 +18,21 @@ namespace Supemarket.Controllers
         private readonly IProductManager productManager;
         public ProductController(IProductManager _productManager)
         {
-            productManager = _productManager ;
+            productManager = _productManager;
         }
 
         // GET: api/<ValuesController>
         [HttpGet]
         public ServiceResponse<List<ProductResource>> Get()
         {
-            ServiceResponse<List<ProductResource>> p = productManager.GetAllProducts();
             return productManager.GetAllProducts();
         }
 
         // GET api/<ValuesController>/5
         [HttpPost]
-        public ServiceResponse<ProductResource> AddProduct (ProductModel newProduct)
+        public ServiceResponse<ProductResource> AddProduct(ProductModel newProduct)
         {
-            Console.WriteLine(newProduct.expiry_date);
+            
             return productManager.AddProduct(newProduct);
         }
 
@@ -43,15 +42,13 @@ namespace Supemarket.Controllers
         public ServiceResponse<ProductResource> GetProductById(int id)
         {
             return productManager.GetProductById(id);
-
-          
         }
 
         // PUT api/<ValuesController>/5
         [HttpPut("{id}")]
-        public ServiceResponse<ProductResource> UpdateProduct(int id , ProductModel updatedProduct)
+        public ServiceResponse<ProductResource> UpdateProduct(int id, ProductModel updatedProduct)
         {
-            return productManager.UpdateProduct(id , updatedProduct);
+            return productManager.UpdateProduct(id, updatedProduct);
         }
 
         // DELETE api/<ValuesController>/5
@@ -61,7 +58,7 @@ namespace Supemarket.Controllers
             return productManager.Delete(id);
         }
 
-       [HttpGet("{searchStr}")]
+        [HttpGet("{searchStr}")]
         public ServiceResponse<List<ProductResource>> getSearchProduct(string searchStr)
         {
             return productManager.getSearchProduct(searchStr);

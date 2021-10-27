@@ -15,7 +15,7 @@
         <!-- <input type="text" id="myInput" [(ngModel)]="searchStr" placeholder="Search for names.." title="Type in a name">
         <button (click) = "myFunction()">click</button>  -->
          <!-- <input  id="form_name"  [(ngModel)]="searchProductStr" (ngModelChange)="myFunction()" placeholder="Search for names.." title="Type in a name" >  -->
-         <input  id="form_name"  (keyup)="myFunction()" placeholder="Search for names.." title="Type in a name" #searchStr> 
+         <input  id="form_name"  (keyup)="searchProductsByName()" placeholder="Search for names.." title="Type in a name" #searchStr> 
    
         <div id="table-wrapper">
         <div [ngClass] = "scrollTableClass">

@@ -13,6 +13,8 @@ import { ProductsRoutingModule } from './products-routing.module';
 import { ProductsEffects } from './productsNgRxTools/products.effects';
 import { productsReducer } from './productsNgRxTools/products.reducer';
 import { UpdateProductComponent } from './update-product/update-product.component';
+import { ReactiveFormsModule } from '@angular/forms';
+
 // import { ProductsRoutingModule } from '../products-routind.module';
 
 // export const productsRoutes: Routes = [
@@ -38,6 +40,7 @@ import { UpdateProductComponent } from './update-product/update-product.componen
     HeaderModule,
     EffectsModule.forFeature([ProductsEffects]),
     StoreModule.forFeature('products', productsReducer),
+    ReactiveFormsModule
   ],
   exports: [
     UpdateProductComponent,

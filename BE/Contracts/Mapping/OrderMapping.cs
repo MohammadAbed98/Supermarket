@@ -14,11 +14,12 @@ namespace Supemarket.Contracts.Mapping
     public static class OrderMapping
     { 
 
-        public static Order MapOrderModelToEntity(  this OrderModel orderModel , Order o)
+        public static Order MapOrderModelToEntity(  this OrderModel orderModel )
         {
-            o.address = orderModel.address;
-            o.total = orderModel.total;
-            return o;
+            Order order = new Order();
+            order.address = orderModel.address;
+            order.total = orderModel.total;
+            return order;
         }
         public static OrderResource MapOrderEntitytoResource(this Order o)
         {

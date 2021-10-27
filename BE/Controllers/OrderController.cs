@@ -21,13 +21,6 @@ namespace Supemarket.Controllers
             _orderManager = orderManager;
         }
 
-        //[HttpPost("skill")]
-        //public async Task<ActionResult<Order>> AddOrderProduct(List<OrderModelWithProducts> newOrderModelWithProducts)
-        //{
-        //    return Ok(await _orderManager.AddCharacterSkill(newOrderModelWithProducts));
-        //}
-
-
         [HttpPost]
         public ServiceResponse<OrderResource> AddOrder(OrderModel newOrder)
         {

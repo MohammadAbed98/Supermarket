@@ -8,7 +8,7 @@ namespace Supemarket.Entities
 {
     //[Table("Product")]
    
-    public class Product
+    public class ProductEntity
     { 
         //[Key]
         //[Column(Order = 1)]

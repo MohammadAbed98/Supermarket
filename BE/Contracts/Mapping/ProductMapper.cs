@@ -10,9 +10,9 @@ namespace Supemarket.Contracts.Mapping
 {
     public static class ProductMapper
     {
-        public static Product MapProductModelToEntity( this ProductModel producModel )
+        public static ProductEntity MapProductModelToEntity( this ProductModel producModel )
         {
-            Product p = new Product();
+            ProductEntity p = new ProductEntity();
             p.name = producModel.name;
             p.number_of_items = producModel.number_of_items;
             //p.parcode = producModel.parcode;
@@ -29,7 +29,7 @@ namespace Supemarket.Contracts.Mapping
             return p;
         }
 
-        public static ProductResource MapProductEntityToResource(this Product product)
+        public static ProductResource MapProductEntityToResource(this ProductEntity product)
         {
 
             ProductResource pR = new ProductResource();

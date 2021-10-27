@@ -12,13 +12,11 @@
             <li ><a routerLink="/orders" routerLinkActive="activeBtn" >Orders</a></li> 
             
             
-            <!-- <li><a routerLink="creat-order" routerLinkActive="activeBtn">Make Order</a></li> -->
-            <!-- <li><a href="#">{{addBtnToHeader}}</a></li> -->
           </ul>
           
           <ul class="nav navbar-nav navbar-right">
-            <!-- <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li> -->
-            <li><a href="login" *ngIf="isLoggedOut | async"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+
+            <!-- <li><a href="login" *ngIf="isLoggedOut | async"><span class="glyphicon glyphicon-log-in"></span> Login</a></li> -->
             <li><a href="login" (click)="Logout()" *ngIf="isLoggedIn | async" ><span class="glyphicon glyphicon-log-out"></span> logout</a></li>
 
           </ul>

@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Product } from '../models/products';
 import { shareReplay, tap, map, filter } from 'rxjs/operators';
-import { Order } from '../models/Order';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +11,7 @@ import { Order } from '../models/Order';
 export class ProductService {
   url: String = 'https://localhost:5001/api';
   public products: Product[] = [];
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient , private router:Router) {}
 
   getAllProducts(): Observable<Array<Product>> {
     return this.http.get<any>(this.url + '/Product').pipe(

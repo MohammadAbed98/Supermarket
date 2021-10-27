@@ -9,58 +9,55 @@ namespace Supemarket.Repositories.ProductRepo
 {
     public interface IProductRepo
     {
-        public List<Product> GetAllProducts();
-        public Product GetProductById(int id);
-        public Product AddProduct(Product newProduct);
-        public Product UpdateProduct(int id , Product updatedProduct);
-        public Product Delete(int id);
-        public Product Find(int id);
-        public List<Product> getSearchProduct(string searchStr);
+        public List<ProductEntity> GetAllProducts();
+        public ProductEntity GetProductById(int id);
+        public ProductEntity AddProduct(ProductEntity newProduct);
+        public ProductEntity UpdateProduct(int id, ProductEntity updatedProduct);
+        public ProductEntity Delete(int id);
+        public ProductEntity Find(int id);
+        public List<ProductEntity> getSearchProduct(string searchStr);
     }
     public class ProductRepo : IProductRepo
     {
         public readonly SupermarketDbContext _db;
-        //private static List<Product> products = new List<Product>
-        //{
-        //    new Product(),
-        //    new Product{ id = 1 , name = "sweet"}
-        //};
+
         public ProductRepo(SupermarketDbContext db)
         {
             _db = db;
         }
-        public List<Product> GetAllProducts()
+        public List<ProductEntity> GetAllProducts()
         {
-            return _db.Products.ToList() ;
+            return _db.Products.ToList();
         }
-        public Product GetProductById(int id)
+        public ProductEntity GetProductById(int id)
         {
             return Find(id);
         }
 
-        public Product AddProduct(Product newProduct)
+        public ProductEntity AddProduct(ProductEntity newProduct)
         {
-
             //if (!ModelState.IsValid)
             //{
 
             //}
-
-                //newProduct.id = products.Max(c => c.id) + 1;
-                _db.Products.Add(newProduct);
-                _db.SaveChanges();
-                return newProduct;
-          
+            //newProduct.id = products.Max(c => c.id) + 1;
+            _db.Products.Add(newProduct);
+            _db.SaveChanges();
+            return newProduct;
 
         }
 
-        public Product Delete(int id)
+        public ProductEntity Delete(int id)
         {
 
-                Product product = Find(id);
+            ProductEntity product = Find(id);
+            if (product is not null)
+            {
                 _db.Products.Remove(product);
                 _db.SaveChanges();
-               return product;
+            }
+
+            return product;
 
 
 
@@ -68,9 +65,9 @@ namespace Supemarket.Repositories.ProductRepo
 
 
 
-        public Product UpdateProduct(int id ,  Product updatedProduct)
+        public ProductEntity UpdateProduct(int id, ProductEntity updatedProduct)
         {
-            Product product = Find(id);
+            ProductEntity product = Find(id);
             product.name = updatedProduct.name;
             product.price = updatedProduct.price;
             //product.parcode = updatedProduct.parcode;
@@ -87,15 +84,15 @@ namespace Supemarket.Repositories.ProductRepo
             return product;
         }
 
-        public Product Find(int id)
+        public ProductEntity Find(int id)
         {
             return _db.Products.FirstOrDefault(p => p.id == id);
         }
 
-        public List<Product> getSearchProduct(string searchStr)
+        public List<ProductEntity> getSearchProduct(string searchStr)
         {
-            List<Product> resultList = new();
-            return  resultList = _db.Products.Where(ele => ele.name.Contains(searchStr)).ToList();
+            List<ProductEntity> resultList = new();
+            return resultList = _db.Products.Where(ele => ele.name.Contains(searchStr)).ToList();
 
             //return _db.Products.FindAll( p => p.name.Contains(searchStr));
         }

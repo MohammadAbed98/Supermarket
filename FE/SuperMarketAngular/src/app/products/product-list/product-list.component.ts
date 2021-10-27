@@ -104,7 +104,6 @@ export class ProductListComponent implements OnInit {
     //   (error) => console.log(error)
     // );
   }
-  GetDetails(value: any) {}
 
   daddProductToCart(id: number) {
     // id: The productId we want to add to cart
@@ -213,7 +212,7 @@ export class ProductListComponent implements OnInit {
     );
   }
 
-  myFunction() {
+  searchProductsByName() {
     if (this.searchStr?.nativeElement.value == '') {
       this.reloadData();
       // this.ReloadDataFromStore();

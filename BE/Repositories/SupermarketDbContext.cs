@@ -15,7 +15,7 @@ namespace Supemarket.Data
         //{
 
         //}
-        public DbSet<Product> Products { get; set; }
+        public DbSet<ProductEntity> Products { get; set; }
         public DbSet<Order> Orders { get; set; }
 
 
@@ -48,7 +48,7 @@ namespace Supemarket.Data
             //    .HasColumnOrder(1);
             //etc..
 
-            modelBuilder.Entity<Product>()
+            modelBuilder.Entity<ProductEntity>()
                 .Property(c => c.name)
                 .IsRequired()
                 .HasMaxLength(255);
