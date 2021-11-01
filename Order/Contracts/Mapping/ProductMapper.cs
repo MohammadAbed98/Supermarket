@@ -1,0 +1,50 @@
+﻿using Order.Entities;
+using Order.Models;
+using Order.Resources;
+
+namespace Order.Contracts.Mapping
+{
+    public static class ProductMapper
+    {
+        public static ProductEntity MapProductModelToEntity( this ProductModel producModel )
+        {
+            ProductEntity p = new ProductEntity();
+            p.name = producModel.name;
+            p.number_of_items = producModel.number_of_items;
+            //p.parcode = producModel.parcode;
+            p.price = producModel.price;
+            p.production_date = producModel.expiry_date;
+            p.expiry_date = producModel.production_date;
+            p.height = producModel.height;
+            p.width = producModel.width;
+            p.length = producModel.length;
+            p.made_in = producModel.made_in;
+            p.active = producModel.active;
+            //p.category = producModel.category;
+
+            return p;
+        }
+
+        public static ProductResource MapProductEntityToResource(this ProductEntity product)
+        {
+
+            ProductResource pR = new ProductResource();
+            pR.Id = product.id;
+            pR.name = product.name;
+            pR.price = product.price;
+            //pR.parcode = product.parcode;
+            pR.number_of_items = product.number_of_items;
+            pR.production_date = product.production_date;
+            pR.expiry_date = product.expiry_date;
+            pR.height = product.height;
+            pR.width = product.width;
+            pR.length = product.length;
+            pR.made_in = product.made_in;
+            pR.active = product.active;
+            return pR;
+        }
+
+      
+
+    }
+}

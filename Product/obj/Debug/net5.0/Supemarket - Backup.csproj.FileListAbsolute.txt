@@ -1,0 +1,67 @@
+C:\Users\moham\OneDrive\Desktop\ASP\Supemarket\BE\bin\Debug\net5.0\appsettings.json
+C:\Users\moham\OneDrive\Desktop\ASP\Supemarket\BE\bin\Debug\net5.0\Supemarket - Backup.exe
+C:\Users\moham\OneDrive\Desktop\ASP\Supemarket\BE\bin\Debug\net5.0\Supemarket - Backup.deps.json
+C:\Users\moham\OneDrive\Desktop\ASP\Supemarket\BE\bin\Debug\net5.0\Supemarket - Backup.runtimeconfig.json
+C:\Users\moham\OneDrive\Desktop\ASP\Supemarket\BE\bin\Debug\net5.0\Supemarket - Backup.runtimeconfig.dev.json
+C:\Users\moham\OneDrive\Desktop\ASP\Supemarket\BE\bin\Debug\net5.0\Supemarket - Backup.dll
+C:\Users\moham\OneDrive\Desktop\ASP\Supemarket\BE\bin\Debug\net5.0\ref\Supemarket - Backup.dll
+C:\Users\moham\OneDrive\Desktop\ASP\Supemarket\BE\bin\Debug\net5.0\Supemarket - Backup.pdb
+C:\Users\moham\OneDrive\Desktop\ASP\Supemarket\BE\bin\Debug\net5.0\Humanizer.dll
+C:\Users\moham\OneDrive\Desktop\ASP\Supemarket\BE\bin\Debug\net5.0\System.Web.Mvc.dll
+C:\Users\moham\OneDrive\Desktop\ASP\Supemarket\BE\bin\Debug\net5.0\System.Web.Razor.dll
+C:\Users\moham\OneDrive\Desktop\ASP\Supemarket\BE\bin\Debug\net5.0\System.Web.Helpers.dll
+C:\Users\moham\OneDrive\Desktop\ASP\Supemarket\BE\bin\Debug\net5.0\System.Web.WebPages.Deployment.dll
+C:\Users\moham\OneDrive\Desktop\ASP\Supemarket\BE\bin\Debug\net5.0\System.Web.WebPages.Razor.dll
+C:\Users\moham\OneDrive\Desktop\ASP\Supemarket\BE\bin\Debug\net5.0\System.Web.WebPages.dll
+C:\Users\moham\OneDrive\Desktop\ASP\Supemarket\BE\bin\Debug\net5.0\Microsoft.Data.SqlClient.dll
+C:\Users\moham\OneDrive\Desktop\ASP\Supemarket\BE\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\moham\OneDrive\Desktop\ASP\Supemarket\BE\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\moham\OneDrive\Desktop\ASP\Supemarket\BE\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\moham\OneDrive\Desktop\ASP\Supemarket\BE\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\moham\OneDrive\Desktop\ASP\Supemarket\BE\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+C:\Users\moham\OneDrive\Desktop\ASP\Supemarket\BE\bin\Debug\net5.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\moham\OneDrive\Desktop\ASP\Supemarket\BE\bin\Debug\net5.0\Microsoft.Identity.Client.dll
+C:\Users\moham\OneDrive\Desktop\ASP\Supemarket\BE\bin\Debug\net5.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\moham\OneDrive\Desktop\ASP\Supemarket\BE\bin\Debug\net5.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\moham\OneDrive\Desktop\ASP\Supemarket\BE\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\moham\OneDrive\Desktop\ASP\Supemarket\BE\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\moham\OneDrive\Desktop\ASP\Supemarket\BE\bin\Debug\net5.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\moham\OneDrive\Desktop\ASP\Supemarket\BE\bin\Debug\net5.0\Microsoft.OpenApi.dll
+C:\Users\moham\OneDrive\Desktop\ASP\Supemarket\BE\bin\Debug\net5.0\Microsoft.Web.Infrastructure.dll
+C:\Users\moham\OneDrive\Desktop\ASP\Supemarket\BE\bin\Debug\net5.0\Newtonsoft.Json.dll
+C:\Users\moham\OneDrive\Desktop\ASP\Supemarket\BE\bin\Debug\net5.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\moham\OneDrive\Desktop\ASP\Supemarket\BE\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\moham\OneDrive\Desktop\ASP\Supemarket\BE\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\moham\OneDrive\Desktop\ASP\Supemarket\BE\bin\Debug\net5.0\System.Configuration.ConfigurationManager.dll
+C:\Users\moham\OneDrive\Desktop\ASP\Supemarket\BE\bin\Debug\net5.0\System.Diagnostics.DiagnosticSource.dll
+C:\Users\moham\OneDrive\Desktop\ASP\Supemarket\BE\bin\Debug\net5.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\moham\OneDrive\Desktop\ASP\Supemarket\BE\bin\Debug\net5.0\System.Runtime.Caching.dll
+C:\Users\moham\OneDrive\Desktop\ASP\Supemarket\BE\bin\Debug\net5.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\moham\OneDrive\Desktop\ASP\Supemarket\BE\bin\Debug\net5.0\runtimes\unix\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+C:\Users\moham\OneDrive\Desktop\ASP\Supemarket\BE\bin\Debug\net5.0\runtimes\win\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+C:\Users\moham\OneDrive\Desktop\ASP\Supemarket\BE\bin\Debug\net5.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\moham\OneDrive\Desktop\ASP\Supemarket\BE\bin\Debug\net5.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.pdb
+C:\Users\moham\OneDrive\Desktop\ASP\Supemarket\BE\bin\Debug\net5.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\moham\OneDrive\Desktop\ASP\Supemarket\BE\bin\Debug\net5.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.pdb
+C:\Users\moham\OneDrive\Desktop\ASP\Supemarket\BE\bin\Debug\net5.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\moham\OneDrive\Desktop\ASP\Supemarket\BE\bin\Debug\net5.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.pdb
+C:\Users\moham\OneDrive\Desktop\ASP\Supemarket\BE\bin\Debug\net5.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\moham\OneDrive\Desktop\ASP\Supemarket\BE\bin\Debug\net5.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.pdb
+C:\Users\moham\OneDrive\Desktop\ASP\Supemarket\BE\bin\Debug\net5.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
+C:\Users\moham\OneDrive\Desktop\ASP\Supemarket\BE\bin\Debug\net5.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\moham\OneDrive\Desktop\ASP\Supemarket\BE\obj\Debug\net5.0\Supemarket - Backup.csproj.AssemblyReference.cache
+C:\Users\moham\OneDrive\Desktop\ASP\Supemarket\BE\obj\Debug\net5.0\Supemarket - Backup.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\moham\OneDrive\Desktop\ASP\Supemarket\BE\obj\Debug\net5.0\Supemarket - Backup.AssemblyInfoInputs.cache
+C:\Users\moham\OneDrive\Desktop\ASP\Supemarket\BE\obj\Debug\net5.0\Supemarket - Backup.AssemblyInfo.cs
+C:\Users\moham\OneDrive\Desktop\ASP\Supemarket\BE\obj\Debug\net5.0\Supemarket - Backup.csproj.CoreCompileInputs.cache
+C:\Users\moham\OneDrive\Desktop\ASP\Supemarket\BE\obj\Debug\net5.0\Supemarket - Backup.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\moham\OneDrive\Desktop\ASP\Supemarket\BE\obj\Debug\net5.0\Supemarket - Backup.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\moham\OneDrive\Desktop\ASP\Supemarket\BE\obj\Debug\net5.0\staticwebassets\Supemarket - Backup.StaticWebAssets.Manifest.cache
+C:\Users\moham\OneDrive\Desktop\ASP\Supemarket\BE\obj\Debug\net5.0\staticwebassets\Supemarket - Backup.StaticWebAssets.xml
+C:\Users\moham\OneDrive\Desktop\ASP\Supemarket\BE\obj\Debug\net5.0\scopedcss\bundle\Supemarket - Backup.styles.css
+C:\Users\moham\OneDrive\Desktop\ASP\Supemarket\BE\obj\Debug\net5.0\Supemarket - Backup.RazorTargetAssemblyInfo.cache
+C:\Users\moham\OneDrive\Desktop\ASP\Supemarket\BE\obj\Debug\net5.0\Supemarket - Backup.csproj.CopyComplete
+C:\Users\moham\OneDrive\Desktop\ASP\Supemarket\BE\obj\Debug\net5.0\Supemarket - Backup.dll
+C:\Users\moham\OneDrive\Desktop\ASP\Supemarket\BE\obj\Debug\net5.0\ref\Supemarket - Backup.dll
+C:\Users\moham\OneDrive\Desktop\ASP\Supemarket\BE\obj\Debug\net5.0\Supemarket - Backup.pdb
+C:\Users\moham\OneDrive\Desktop\ASP\Supemarket\BE\obj\Debug\net5.0\Supemarket - Backup.genruntimeconfig.cache
