@@ -44,7 +44,5 @@ namespace Order.Contracts.Mapping
             return pR;
         }
 
-      
-
     }
 }

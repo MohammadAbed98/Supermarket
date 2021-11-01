@@ -14,6 +14,7 @@ namespace Order.Repositories.ProductRepo
         public ProductEntity AddProduct(ProductEntity newProduct);
         public ProductEntity UpdateProduct(int id, ProductEntity updatedProduct);
         public ProductEntity Delete(int id);
+        public void DeleteAllProducts();
         public ProductEntity Find(int id);
         public List<ProductEntity> getSearchProduct(string searchStr);
     }
@@ -97,5 +98,17 @@ namespace Order.Repositories.ProductRepo
 
             //return _db.Products.FindAll( p => p.name.Contains(searchStr));
         }
+
+        public async void DeleteAllProducts()
+        {
+            foreach (var entity in _db.Products)
+                _db.Products.Remove(entity);
+
+            _db.SaveChanges();
+
+        }
+
+
+
     }
 }

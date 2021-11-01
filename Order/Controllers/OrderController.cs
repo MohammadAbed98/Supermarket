@@ -54,5 +54,13 @@ namespace Order.Controllers
             return _orderManager.DeleteOrder(id);
         }
 
+        [HttpGet("Harvest")]
+        
+        public string PublishMessageToHarvest()
+        {
+
+            _orderManager.SendMessageToHarvestQueue();
+            return "Harvest is Runing";
+        }
     }
 }

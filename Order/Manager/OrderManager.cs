@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using order.models;
 using Order.Entities;
+using Order.RabbitMQ;
 
 namespace Order.Manager
 {
@@ -19,7 +20,7 @@ namespace Order.Manager
         public ServiceResponse<OrderResource> AddOrder(OrderModel newOrder);
         public ServiceResponse<OrderResource> UpdateOrder(int id, OrderModel updatedorder);
         public ServiceResponse<OrderResource> DeleteOrder(int id);
-
+        string SendMessageToHarvestQueue();
     }
 
     public class OrderManager : IOrderManager
@@ -227,5 +228,12 @@ namespace Order.Manager
             return productsFromDB;
         }
 
+        public string SendMessageToHarvestQueue()
+        {
+            string message = "RefreshData";
+            Sender sender = new Sender();
+            sender.Send(message);
+            return message;
+        }
     }
 }

@@ -11,8 +11,8 @@ namespace Supemarket.RabbitMQ
     }
     public class Sender : ISender
     {
-        
-        public void Send(string opp , int productId )
+
+        public void Send(string opp, int productId)
         {
             // create a connection to the server:
             var factory = new ConnectionFactory() { HostName = "localhost" };
@@ -24,7 +24,7 @@ namespace Supemarket.RabbitMQ
                                      exclusive: false,
                                      autoDelete: false,
                                      arguments: null);
-                string sentMessage = opp + "," + productId     ; 
+                string sentMessage = opp + "," + productId;
                 var body = Encoding.UTF8.GetBytes(sentMessage);
 
                 channel.BasicPublish(exchange: "",
@@ -33,7 +33,6 @@ namespace Supemarket.RabbitMQ
                                      body: body);
 
                 Console.WriteLine("[ Sender ]  Sent: {0}", sentMessage);
-
             }
 
         }

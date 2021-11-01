@@ -1,26 +1,23 @@
-﻿using Newtonsoft.Json;
-using Order.Contracts.Mapping;
+﻿using Order.Contracts.Mapping;
 using Order.Entities;
-using Order.Models;
 using Order.Repositories.ProductRepo;
 using Order.Resources;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Net;
-using System.Text;
 
 namespace Order.Manager
 {
     public interface IProductManager
     {
         public ServiceResponse<ProductResource> AddProduct(ProductEntity newProduct);
+
         public ServiceResponse<ProductResource> GetProductById(int id);
         public ServiceResponse<ProductResource> UpdateProduct(int id, ProductEntity updatedProduct);
-        ServiceResponse<List<ProductResource>> GetAllProducts();
-        ServiceResponse<ProductResource> Delete(int id);
-        ServiceResponse<List<ProductResource>> getSearchProduct(string searchStr);
+        public ServiceResponse<List<ProductResource>> GetAllProducts();
+        public ServiceResponse<ProductResource> Delete(int id);
+        public bool DeleteAllProducts();
+        public ServiceResponse<List<ProductResource>> getSearchProduct(string searchStr);
     }
 
 
@@ -147,6 +144,23 @@ namespace Order.Manager
             return serviceResponse;
         }
 
+        public bool DeleteAllProducts()
+        {
+            try
+            {
+             _productRepo.DeleteAllProducts();
+
+            }
+            catch
+            {
+                return false;
+            }
+            return true;
+
+        }
+
+       
+
         //public ProductEntity getProdutFromProductMicroservice()
         //{
 
@@ -154,8 +168,8 @@ namespace Order.Manager
         //    var streamTask = client.GetStreamAsync("");
         //}
 
-    
-       
+
+
 
     }
 }
