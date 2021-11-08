@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "UzWT4zSj5VpBXfgEcTRfvS1APfosBPfiC9JiJ78tXraDHeWwPVOzHqFCR1a6HyRAPsA49nWYI0chld98vcqaeA==",
+  "dgSpecHash": "lPzOeEPLT4EVea8NE36WTIyuGFZzN1JuJ8xMyORIf0zOgNcYiqEaz1Lfy7eslDA8YYD9OOMbw/cyKWHBlyfFUw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\moham\\OneDrive\\Desktop\\ASP\\Supemarket\\BE-With RabbitMQ\\Supemarket.csproj",
+  "projectFilePath": "C:\\Users\\moham\\OneDrive\\Desktop\\ASP\\Supemarket\\BE\\Supemarket.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\moham\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\moham\\.nuget\\packages\\microsoft.aspnet.mvc\\5.2.7\\microsoft.aspnet.mvc.5.2.7.nupkg.sha512",

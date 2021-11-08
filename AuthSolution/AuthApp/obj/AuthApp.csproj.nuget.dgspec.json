@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\moham\\OneDrive\\Desktop\\ASP\\Supemarket\\BE\\Supemarket.csproj": {}
+    "C:\\Users\\moham\\OneDrive\\Desktop\\ASP\\Supemarket\\AuthSolution\\AuthApp\\AuthApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\moham\\OneDrive\\Desktop\\ASP\\Supemarket\\BE\\Supemarket.csproj": {
+    "C:\\Users\\moham\\OneDrive\\Desktop\\ASP\\Supemarket\\AuthSolution\\AuthApp\\AuthApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\moham\\OneDrive\\Desktop\\ASP\\Supemarket\\BE\\Supemarket.csproj",
-        "projectName": "Supemarket",
-        "projectPath": "C:\\Users\\moham\\OneDrive\\Desktop\\ASP\\Supemarket\\BE\\Supemarket.csproj",
+        "projectUniqueName": "C:\\Users\\moham\\OneDrive\\Desktop\\ASP\\Supemarket\\AuthSolution\\AuthApp\\AuthApp.csproj",
+        "projectName": "AuthApp",
+        "projectPath": "C:\\Users\\moham\\OneDrive\\Desktop\\ASP\\Supemarket\\AuthSolution\\AuthApp\\AuthApp.csproj",
         "packagesPath": "C:\\Users\\moham\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\moham\\OneDrive\\Desktop\\ASP\\Supemarket\\BE\\obj\\",
+        "outputPath": "C:\\Users\\moham\\OneDrive\\Desktop\\ASP\\Supemarket\\AuthSolution\\AuthApp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\moham\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -46,31 +46,19 @@
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[5.0.10, )"
+              "version": "[5.0.11, )"
             },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[5.0.10, )"
-            },
-            "Microsoft.EntityFrameworkCore.SqlServer": {
-              "target": "Package",
-              "version": "[5.0.10, )"
+              "version": "[5.0.11, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[5.0.10, )"
-            },
-            "RabbitMQ.Client": {
-              "target": "Package",
-              "version": "[6.2.2, )"
-            },
-            "Swashbuckle.AspNetCore": {
-              "target": "Package",
-              "version": "[5.6.3, )"
+              "version": "[5.0.11, )"
             }
           },
           "imports": [
@@ -84,14 +72,11 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
-            "Microsoft.AspNetCore.App": {
-              "privateAssets": "none"
-            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -28,3 +28,14 @@ input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none; 
   margin: 0; 
 }
+
+.alertDanger
+{
+  color: red;
+  text-decoration: underline;
+  text-align: left;
+  font-size: 12px;  
+}
+.alert-danger-input{
+background-color: red;
+}

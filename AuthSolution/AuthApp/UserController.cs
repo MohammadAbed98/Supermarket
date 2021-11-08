@@ -1,0 +1,7 @@
+﻿
+namespace AuthApp
+{
+    class UserController 
+    {
+    }
+}

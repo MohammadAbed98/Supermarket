@@ -32,7 +32,8 @@ namespace Supemarket.Controllers
         [HttpPost]
         public ServiceResponse<ProductResource> AddProduct(ProductModel newProduct)
         {
-            
+            Console.WriteLine(newProduct.expiry_date);
+
             return productManager.AddProduct(newProduct);
         }
 

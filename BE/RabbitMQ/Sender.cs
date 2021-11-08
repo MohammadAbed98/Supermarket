@@ -2,7 +2,7 @@
 using RabbitMQ.Client;
 using System.Text;
 
-
+/// http://localhost:15672/
 namespace Supemarket.RabbitMQ
 {
     public class Sender

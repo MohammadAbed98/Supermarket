@@ -32,19 +32,12 @@ namespace Supemarket.Manager
         public ServiceResponse<ProductResource> AddProduct(ProductModel newProduct)
         {
             var serviceResponse = new ServiceResponse<ProductResource>();
-            try
-            {
+
                 ProductEntity product = newProduct.MapProductModelToEntity();
                 _productRepo.AddProduct(product);
                 serviceResponse.Data = product.MapProductEntityToResource();
                 serviceResponse.Success = true;
-            }
-            catch (Exception e)
-            {
-                serviceResponse.Message = e.Message.ToString();
-                serviceResponse.Success = false;
-
-            }
+ 
             if(serviceResponse.Success == true)
             {
                 Sender sendMsg = new Sender();
@@ -92,18 +85,19 @@ namespace Supemarket.Manager
         public ServiceResponse<ProductResource> UpdateProduct(int id, ProductModel updatedProduct)
         {
             var serviceResponse = new ServiceResponse<ProductResource>();
-            try
-            {
+
                 ProductEntity product = new ProductEntity();
                 product = _productRepo.UpdateProduct(id, updatedProduct.MapProductModelToEntity());
-                serviceResponse.Data = product.MapProductEntityToResource();
-            }
-            catch (Exception e)
+                
+            if(product is null)
             {
                 serviceResponse.Data = null;
                 serviceResponse.Success = false;
                 serviceResponse.Message = "This Product does not exist";
+                return serviceResponse;
             }
+            serviceResponse.Data = product.MapProductEntityToResource();
+
 
             if (serviceResponse.Success == true)
             {

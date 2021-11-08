@@ -6195,11 +6195,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\moham\\OneDrive\\Desktop\\ASP\\Supemarket\\BE-With RabbitMQ\\Supemarket.csproj",
+      "projectUniqueName": "C:\\Users\\moham\\OneDrive\\Desktop\\ASP\\Supemarket\\BE\\Supemarket.csproj",
       "projectName": "Supemarket",
-      "projectPath": "C:\\Users\\moham\\OneDrive\\Desktop\\ASP\\Supemarket\\BE-With RabbitMQ\\Supemarket.csproj",
+      "projectPath": "C:\\Users\\moham\\OneDrive\\Desktop\\ASP\\Supemarket\\BE\\Supemarket.csproj",
       "packagesPath": "C:\\Users\\moham\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\moham\\OneDrive\\Desktop\\ASP\\Supemarket\\BE-With RabbitMQ\\obj\\",
+      "outputPath": "C:\\Users\\moham\\OneDrive\\Desktop\\ASP\\Supemarket\\BE\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\moham\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -6279,7 +6279,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.402\\RuntimeIdentifierGraph.json"
       }
     }
   },

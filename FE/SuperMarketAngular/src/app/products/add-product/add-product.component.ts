@@ -1,7 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { $ } from 'protractor';
 import { Product } from 'src/app/models/products';
 import { CommonService } from 'src/app/services/Common.Service';
 import { ProductService } from 'src/app/services/product.service';
@@ -56,17 +57,17 @@ export class AddProductComponent implements OnInit {
     this.id = this.route.snapshot.params['id'];
 
     this.addForm = new FormGroup({
-      name: new FormControl(null),
-      price: new FormControl(),
-      production_date: new FormControl(),
-      expiry_date: new FormControl(),
-      number_of_items: new FormControl(),
-      category: new FormControl(),
-      width: new FormControl(),
-      height: new FormControl(),
-      length: new FormControl(),
-      made_in: new FormControl(),
-      active: new FormControl(),
+      name: new FormControl(null , [Validators.required]),
+      price: new FormControl(null , [Validators.required]),
+      production_date: new FormControl(null ,[Validators.required]),
+      expiry_date: new FormControl(null ,[Validators.required]),
+      number_of_items: new FormControl(null ,[Validators.required]),
+      category: new FormControl(null ,[Validators.required]),
+      width: new FormControl(null ,[Validators.required]),
+      height: new FormControl(null ,[Validators.required]),
+      length: new FormControl(null ,[Validators.required]),
+      made_in: new FormControl(null ,[Validators.required]),
+      active: new FormControl(null ,[Validators.required]),
     });
 
     // if(this.addForm.get("active")?.value == "1"){
@@ -77,6 +78,11 @@ export class AddProductComponent implements OnInit {
         ['', null, NaN].includes(this.addForm.value[key])
       );
     });
+
+  }
+
+  ShowErrorMsg(param:any){
+    return !this.addForm.get(param)?.valid && (this.addForm.get(param)?.dirty || this.addForm.get(param)?.touched) ;
   }
   // addProduct(){
   //   this.appStoreProducts.dispatch(addProduct(this.addForm.value)) ;
@@ -87,6 +93,7 @@ export class AddProductComponent implements OnInit {
   //   //   this.gotoList();
   //   // }, error => console.log("Error: ",error));
   // }
+
 
   addProduct() {
 
@@ -184,3 +191,5 @@ export class AddProductComponent implements OnInit {
 // <input formControlName="firstName">
 // <input [(ngModel)]="showMoreControls" [ngModelOptions]="{standalone: true}">
 // </div>
+
+

@@ -79,6 +79,11 @@ export class UpdateProductComponent implements OnInit {
     this.appStore
       .select(selectedProduct)
       .subscribe((x) => (this.productToBeUpdate = x));
+
+      if(this.productToBeUpdate.length > 0)
+      console.log(" >>>>>>>> " , this.productToBeUpdate);
+      console.log(" *** ",this.productToBeUpdate.price);
+      
     // this.productService
     //   .getProductById(this.id)
     //   .subscribe((product) => (this.productToBeUpdate = product));

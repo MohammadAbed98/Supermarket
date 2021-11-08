@@ -3,69 +3,99 @@
   <!-- <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script> -->
 </head>
 <div class="container">
-<h3>Add Product</h3>
-<form [formGroup]="addForm">
-<table form="rowForm" class="table table-striped" width="100%" id="myTable" >
-  <thead>
-    <tr>
+  <h3>Add Product</h3>
+  <form [formGroup]="addForm">
+    <table form="rowForm" class="table table-striped" width="100%" id="myTable">
+      <thead>
+        <tr>
 
-      <th>Product Name</th>
-      <th>Price</th>
-      <th>Production Date</th>
-      <th>Expiry Date</th>
-      <th>Number Of Items</th>
-      <th>Category</th>
-      <th>Dimensions(L*W*H)</th>
-      <th>Made In</th>
-      <th>Active</th>
-    </tr>
-  </thead>
-  <tbody>  
+          <th>Product Name</th>
+          <th>Price</th>
+          <th>Production Date</th>
+          <th>Expiry Date</th>
+          <th>Number Of Items</th>
+          <th>Category</th>
+          <th>Dimensions(L*W*H)</th>
+          <th>Made In</th>
+          <th>Active</th>
+        </tr>
+      </thead>
+      <tbody>
 
-      <td ><input type="text" class="form-control is-valid" style="width: 90%;text-align: center;" formControlName="name" ></td>
-      <td ><input type="number" class="form-control is-valid" style="width: 90%;text-align: center;" formControlName= "price" ></td>
-      <td ><input type="Date" class="form-control is-valid" style="width: 90%;text-align: center;" formControlName= "production_date" ></td>
-      <td ><input type="Date" class="form-control is-valid" style="width: 90%;text-align: center;" formControlName= "expiry_date"></td>
-      <td ><input type="number" class="form-control is-valid" style="width: 90%;text-align: center;" formControlName= "number_of_items"></td>
-      <td ><input type="number" class="form-control is-valid" style="width: 90%;text-align: center;" formControlName= "category"></td>
-      <td width="10%" >
-     
-          <tr >
-            <td class="dimentiosCell"><input type="number" class="form-control is-valid" style="width: 85%;"  formControlName="length"></td>
-            <td class="dimentiosCell"><label style="font-size: 20px; margin: 0vw;"> * </label></td>
+        <td><input type="text" class="form-control" style="width: 90%;text-align: center;" formControlName="name"
+            required>
+          <div *ngIf="ShowErrorMsg('name')" class="alertDanger">Pleas fill out this field!</div>
+        </td>
+        <td><input type="number" class="form-control" style="width: 90%;text-align: center;" formControlName="price">
+          <div *ngIf="ShowErrorMsg('price')" class="alertDanger">Pleas fill out this field!</div>
+        </td>
+        <td><input type="Date" class="form-control" style="width: 90%;text-align: center;"
+            formControlName="production_date">
+          <div *ngIf="ShowErrorMsg('production_date')" class="alertDanger">Pleas fill out this field!</div>
+        </td>
+        <td><input type="Date" class="form-control" style="width: 90%;text-align: center;"
+            formControlName="expiry_date">
+          <div *ngIf="ShowErrorMsg('expiry_date')" class="alertDanger">Pleas fill out this field!</div>
+        </td>
+        <td><input type="number" class="form-control" style="width: 90%;text-align: center;"
+            formControlName="number_of_items">
+          <div *ngIf="ShowErrorMsg('number_of_items')" class="alertDanger">Pleas fill out this field!</div>
+        </td>
+        <td><input type="number" class="form-control" style="width: 90%;text-align: center;" formControlName="category">
+          <div *ngIf="ShowErrorMsg('category')" class="alertDanger">Pleas fill out this field!</div>
+        </td>
+        <td width="10%">
+
+          <tr>
+            <td class="dimentiosCell"><label style="font-size: 20px; margin: 0vw;">L:</label></td>
+            <td class="dimentiosCell"><input type="number" class="form-control" style="width: 85%;"
+                formControlName="length">
+              <div *ngIf="ShowErrorMsg('length')" class="alertDanger">Pleas fill out this field!</div>
+            </td>
+            
           </tr>
-          <tr >
-            <td class="dimentiosCell"><input type="number" class="form-control is-valid" style="width: 85%;"  formControlName="width" ></td>
-            <td class="dimentiosCell"><label style="font-size: 20px; margin: 0vw;"> * </label></td>
+          <tr>
+            <td class="dimentiosCell"><label style="font-size: 20px; margin: 0vw;">W:</label></td>
+            <td class="dimentiosCell"><input type="number" class="form-control" style="width: 85%;"
+                formControlName="width">
+              <div *ngIf="ShowErrorMsg('width')" class="alertDanger">Pleas fill out this field!</div>
+            </td>
+            
           </tr>
-          <tr >
-            <td class="dimentiosCell"><input type="number" class="form-control is-valid" style="width: 85%;"  formControlName="height"> </td>
+          <tr>
+            <td class="dimentiosCell"><label style="font-size: 20px; margin: 0vw;">H:</label></td>
+            <td class="dimentiosCell"><input type="number" class="form-control" style="width: 85%;"
+                formControlName="height">
+              <div *ngIf="ShowErrorMsg('height')" class="alertDanger">Pleas fill out this field!</div>
+            </td>
           </tr>
-      </td> 
-      <td ><input type="text" class="form-control is-valid" style="width: 90%;text-align: center;"  formControlName="made_in"></td>
-      <td >
-        <select name="my-select" [(ngModel)]="mySelect" (change)="selectChange()" formControlName="active">
+        </td>
+        <td><input type="text" class="form-control" style="width: 90%;text-align: center;" formControlName="made_in">
+          <div *ngIf="ShowErrorMsg('made_in')" class="alertDanger">Pleas fill out this field!</div>
+
+        </td>
+        <td>
+          <select name="my-select" [(ngModel)]="mySelect" (change)="selectChange()" formControlName="active">
             <option [value]="item.id" *ngFor="let item of data">
-                {{item.name}}
+              {{item.name}}
             </option>
-        </select>
-          </td>
+          </select>
+        </td>
 
-    
-  </tbody>
-  <a (click)="addRow()" style="font-size:18px;cursor: cell;margin-right: 5%;" > <i class="fa fa-plus-circle"></i>Add Product</a>
+      </tbody>
+      <a (click)="addRow()" style="font-size:18px;cursor: cell;margin-right: 5%;"> <i class="fa fa-plus-circle"></i>Add
+        Product</a>
 
-</table>
-    </form>
-
-    <button type="submit" [routerLink]='[validProductInfo ? "./" : "/products"]'  class="btn btn-success" (click)="addProduct()">Submit</button>
-    <div *ngIf="validProductInfo" style="color: red;" class="test"> <strong> Make sure to fil all feilds </strong> </div>
+    </table>
+  </form>
+  <!-- <div *ngIf="addForm.invalid && (addForm.dirty || addForm.touched)"
+    class="alertDanger">Make sure to fil all feilds</div> -->
+  <!-- <div *ngIf="addForm.errors.required">
+      Name is required.
+    </div> -->
+  <button [disabled]="validProductInfo" type="submit" [routerLink]='[validProductInfo ? "./" : "/products"]'
+    class="btn btn-success" (click)="addProduct()">Submit</button>
+  <!-- <div *ngIf="validProductInfo" style="color: red;" class="test"> <strong> Make sure to fil all feilds </strong> </div> -->
   <!-- <br> -->
-    <!-- <label style="color: red;" class="validError"><strong>  Make sure to fil all feilds</strong></label> -->
-<!-- <a routerLink="../products"><input class="btn btn-primary" type="submit" value="Submit"></a> -->
-
-
-
-</div>
-
-
+  <!-- <label style="color: red;" class="validError"><strong>  Make sure to fil all feilds</strong></label> -->
+  <!-- <a routerLink="../products"><input class="btn btn-primary" type="submit" value="Submit"></a> -->

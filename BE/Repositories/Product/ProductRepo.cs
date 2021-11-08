@@ -68,9 +68,10 @@ namespace Supemarket.Repositories.ProductRepo
         public ProductEntity UpdateProduct(int id, ProductEntity updatedProduct)
         {
             ProductEntity product = Find(id);
+            if(product is not null)
+            {
             product.name = updatedProduct.name;
             product.price = updatedProduct.price;
-            //product.parcode = updatedProduct.parcode;
             product.number_of_items = updatedProduct.number_of_items;
             product.category = updatedProduct.category;
             product.production_date = updatedProduct.production_date;
@@ -81,6 +82,8 @@ namespace Supemarket.Repositories.ProductRepo
             product.active = updatedProduct.active;
             product.made_in = updatedProduct.made_in;
             _db.SaveChanges();
+            }
+          
             return product;
         }
 
